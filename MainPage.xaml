@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Ruletka.MainPage" HeightRequest="900" WidthRequest="900">
+             x:Class="Ruletka.MainPage"  WidthRequest="900">
     
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -9,6 +9,7 @@
             <GradientStop Color="Black" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+    
     <ContentPage.Resources>
         <Style x:Key="BottomLineStyle" TargetType="BoxView">
             <Setter Property="HeightRequest" Value="1" />
@@ -23,7 +24,7 @@
         <StackLayout>
 
             <!--HEADER-->
-            <Grid Background="#0A0F1C" HeightRequest="50">
+            <Grid Background="#0A0F1C" HeightRequest="60" Padding="0,10,0,0">
 
                 <Border Background="SlateGray" WidthRequest="200" HeightRequest="40" HorizontalOptions="Start" 
                         VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
@@ -43,6 +44,9 @@
 
                 <Border Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
                         VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AccountTapped"/>
+                    </Border.GestureRecognizers>
                     <HorizontalStackLayout x:Name="account" >
                         <Image Source="konto.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0" HorizontalOptions="Center"/>
                     </HorizontalStackLayout>
@@ -53,13 +57,13 @@
             <Grid>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="500"></ColumnDefinition>
+                    <ColumnDefinition Width="550"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <!--KOŁO RULETKI-->
+                <!--LEWA STRONA-->
                 <StackLayout Grid.Column="0" Padding="20">
-
+                    <!--KOŁO RULETKI-->
                     <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,0,0,15">
 
                         <VerticalStackLayout>
@@ -69,20 +73,21 @@
                             <!-- GraphicsView – tutaj rysowane jest koło -->
                             <GraphicsView x:Name="WheelView" HeightRequest="340" WidthRequest="340" HorizontalOptions="Center" Margin="0,8,0,8"/>
 
+                            <Label x:Name="result_label"></Label>
                             <!-- Przyciski -->
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
                                 <Button x:Name="SpinButton" Text="▶️ Zakręć kołem" Background="Maroon" FontAttributes="Bold" Clicked="OnSpinClicked" TextColor="#F5F5F5"/>
 
-                                <Button Text="Usuń zakłady" Background="DarkGray"/>
+                                <Button Text="⟳ Usuń zakłady" Background="DarkGray"/>
                             </HorizontalStackLayout>
 
                         </VerticalStackLayout>
 
                     </Border>
-
+                    <!--ZAKŁADY-->
                     <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10">
                         <VerticalStackLayout>
-                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="18" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Zakłady</Label>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Zakłady</Label>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
@@ -121,7 +126,83 @@
                     </Border>
 
                 </StackLayout>
-                <StackLayout Grid.Column="1"></StackLayout>
+                <!--PRAWA STRONA-->
+                <StackLayout Grid.Column="1" Padding="20">
+                    <!--ŻETONY-->
+                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10">
+                        <VerticalStackLayout>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Żetony</Label>
+
+                            <HorizontalStackLayout>
+                                <Button Text="1$"></Button>
+                                <Button Text="5$"></Button>
+                                <Button Text="25$"></Button>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Button Text="50$"></Button>
+                                <Button Text="100$"></Button>
+                                <Button Text="500$"></Button>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                    <!--ZAKŁAD-INFO-->
+                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                        <VerticalStackLayout>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Obecny zakład</Label>
+
+                            <Border Background="LightGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Margin="0,5,0,0">
+                                <HorizontalStackLayout HeightRequest="30">
+                                    <Label x:Name="current_color_label"></Label>
+                                    <Label x:Name="current_color_bet_label"></Label>
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <Border Background="LightGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Margin="0,10,0,0">
+                                <HorizontalStackLayout HeightRequest="30">
+                                    <Label x:Name="current_number_label"></Label>
+                                    <Label x:Name="current_number_bet_label"></Label>
+                                </HorizontalStackLayout>
+                            </Border>
+                            <BoxView Style="{StaticResource BottomLineStyle}" Margin="0,10,0,0" Color="Black" HeightRequest="2"></BoxView>
+
+                            <HorizontalStackLayout>
+                                <Label FontSize="16" FontFamily="PlayfairDisplay" HorizontalOptions="Start" Margin="4">Łączny zakład:</Label>
+                                <Label x:Name="total_current_bet"></Label>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--STATYSTYKI GRY-->
+                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                        <VerticalStackLayout>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Statystyki gry</Label>
+
+                            <HorizontalStackLayout>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0">Zagrane gry:</Label>
+                                <Label x:Name="games_playes_label"></Label>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0">Łączcna wygrana: </Label>
+                                <Label x:Name="total_cash_won_label"></Label>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0">Wygrane gry:</Label>
+                                <Label x:Name="games_won_label"></Label>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <!--HISTORIA-->
+                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                        <VerticalStackLayout>
+                            <Label  Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Ostatnie zakłady</Label>
+                            
+                        </VerticalStackLayout>
+                    </Border>   
+                </StackLayout>
             </Grid>
 
         </StackLayout>

@@ -12,6 +12,8 @@
             WheelView.Drawable = _drawable;
         }
 
+        #region koło ruletki
+
         // Wywołaj tę metodę ze swojej logiki, podając kąt końcowy obrotu
         public async Task SpinToAngle(float targetAngle, int durationMs = 1000)
         {
@@ -57,6 +59,12 @@
 
             _drawable.RotationAngle = toAngle;
             WheelView.Invalidate();
+        }
+        #endregion
+
+        private void AccountTapped(object sender, TappedEventArgs e)
+        {
+
         }
     }
 }
