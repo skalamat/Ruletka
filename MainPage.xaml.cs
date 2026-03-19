@@ -64,7 +64,16 @@
 
         private void AccountTapped(object sender, TappedEventArgs e)
         {
+            Navigation.PushAsync(new AccountPage());
+        }
+        private void AccountHoverEntered(object? sender, PointerEventArgs e)
+        {
+            AccountBorder.Background = new SolidColorBrush(Colors.LightGray);
+        }
 
+        private void AccountHoverExited(object? sender, PointerEventArgs e)
+        {
+            AccountBorder.Background = new SolidColorBrush(Colors.SlateGray);
         }
     }
 }

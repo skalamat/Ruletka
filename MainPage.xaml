@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Ruletka.MainPage"  WidthRequest="900">
+             x:Class="Ruletka.MainPage"  WidthRequest="950">
     
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -38,16 +38,18 @@
                 <Border Background="SlateGray" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
                         VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
                     <HorizontalStackLayout>
-                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" x:Name="balance_label">Saldo:</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" >Saldo:</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" x:Name="balance_label"></Label>
                     </HorizontalStackLayout>
                 </Border>
 
-                <Border Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
-                        VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                <Border x:Name="AccountBorder" Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
+                    VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="AccountTapped"/>
+                        <PointerGestureRecognizer PointerEntered="AccountHoverEntered" PointerExited="AccountHoverExited"/>
                     </Border.GestureRecognizers>
-                    <HorizontalStackLayout x:Name="account" >
+                    <HorizontalStackLayout x:Name="account">
                         <Image Source="konto.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0" HorizontalOptions="Center"/>
                     </HorizontalStackLayout>
                 </Border>
@@ -57,7 +59,7 @@
             <Grid>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="550"></ColumnDefinition>
+                    <ColumnDefinition Width="650"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
@@ -88,8 +90,11 @@
                     <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10">
                         <VerticalStackLayout>
                             <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Zakłady</Label>
-                            <Grid>
+                            <Grid RowSpacing="2" ColumnSpacing="2">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
@@ -102,26 +107,81 @@
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition ></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 
                                 <!--ZIELONE-->
-                                <Button Grid.Column="0" Grid.Row="1"></Button>
+                                <Button Grid.Column="0" Grid.Row="1" Text="0" Background="Green" Padding="0" TextColor="White"></Button>
                                 
                                 <!--1 KOLUMNA-->
-                                <Button Grid.Column="1" Grid.Row="0"></Button>
-                                <Button Grid.Column="1" Grid.Row="1"></Button>
-                                <Button Grid.Column="1" Grid.Row="2"></Button>
+                                <Button Grid.Column="1" Grid.Row="0" Text="3" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="1" Grid.Row="1" Text="2" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="1" Grid.Row="2" Text="1" Background="#B81304" TextColor="White"></Button>
                                 
                                 <!--2 KOLUMNA-->
-                                <Button Grid.Column="2" Grid.Row="0"></Button>
-                                <Button Grid.Column="2" Grid.Row="1"></Button>
-                                <Button Grid.Column="2" Grid.Row="2"></Button>
-                                
-                                <!--TO DO - reszta numerów i zakłady na kolor(narazie)-->
+                                <Button Grid.Column="2" Grid.Row="0" Text="6" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="2" Grid.Row="1" Text="5" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="2" Grid.Row="2" Text="4" Background="#242424" TextColor="White"></Button>
+
+                                <!--3 KOLUMNA-->
+                                <Button Grid.Column="3" Grid.Row="0" Text="9" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="3" Grid.Row="1" Text="8" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="3" Grid.Row="2" Text="7" Background="#B81304" TextColor="White"></Button>
+
+                                <!--4 KOLUMNA-->
+                                <Button Grid.Column="4" Grid.Row="0" Text="12" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="4" Grid.Row="1" Text="11" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="4" Grid.Row="2" Text="10" Background="#242424" TextColor="White"></Button>
+
+                                <!--5 KOLUMNA-->
+                                <Button Grid.Column="5" Grid.Row="0" Text="15" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="5" Grid.Row="1" Text="14" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="5" Grid.Row="2" Text="13" Background="#B81304" TextColor="White"></Button>
+
+                                <!--6 KOLUMNA-->
+                                <Button Grid.Column="6" Grid.Row="0" Text="18" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="6" Grid.Row="1" Text="17" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="6" Grid.Row="2" Text="16" Background="#242424" TextColor="White"></Button>
+
+                                <!--7 KOLUMNA-->
+                                <Button Grid.Column="7" Grid.Row="0" Text="21" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="7" Grid.Row="1" Text="20" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="7" Grid.Row="2" Text="19" Background="#B81304" TextColor="White"></Button>
+
+                                <!--8 KOLUMNA-->
+                                <Button Grid.Column="8" Grid.Row="0" Text="24" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="8" Grid.Row="1" Text="23" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="8" Grid.Row="2" Text="22" Background="#242424" TextColor="White"></Button>
+
+                                <!--9 KOLUMNA-->
+                                <Button Grid.Column="9" Grid.Row="0" Text="27" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="9" Grid.Row="1" Text="26" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="9" Grid.Row="2" Text="25" Background="#B81304" TextColor="White"></Button>
+
+                                <!--10 KOLUMNA-->
+                                <Button Grid.Column="10" Grid.Row="0" Text="30" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="10" Grid.Row="1" Text="29" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="10" Grid.Row="2" Text="28" Background="#242424" TextColor="White"></Button>
+
+                                <!--11 KOLUMNA-->
+                                <Button Grid.Column="11" Grid.Row="0" Text="33" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="11" Grid.Row="1" Text="32" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="11" Grid.Row="2" Text="31" Background="#B81304" TextColor="White"></Button>
+
+                                <!--12 KOLUMNA-->
+                                <Button Grid.Column="12" Grid.Row="0" Text="36" Background="#242424" TextColor="White"></Button>
+                                <Button Grid.Column="12" Grid.Row="1" Text="35" Background="#B81304" TextColor="White"></Button>
+                                <Button Grid.Column="12" Grid.Row="2" Text="34" Background="#242424" TextColor="White"></Button>
                             </Grid>
+                            
+                            <!--RESZTA ZAKŁADÓW (kolory)-->
+                            <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+                                <Button Text="Czerwony" WidthRequest="150" Margin="5" TextColor="White" Background="#B81304"></Button>
+                                <Button Text="Czarny" WidthRequest="150" Margin="5" TextColor="White" Background="#242424"></Button>
+                            </HorizontalStackLayout>
+                            
                         </VerticalStackLayout>
                     </Border>
 

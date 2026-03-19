@@ -52,14 +52,32 @@ public class RouletteWheelDrawable : IDrawable
             };
 
             float r = outerRadius - rimWidth;
-            var path = new PathF();
-            path.MoveTo(0, 0);
-            path.AddArc(-r, -r, r, r, startAngle, startAngle + SectorAngle, false);
-            path.LineTo(0, 0);
-            path.Close();
+            float innerColorRadius = r * 0.85f; // od tego promienia zaczyna się kolor (końcówka)
 
-            canvas.FillColor = fill;
-            canvas.FillPath(path);
+            // ── Cały sektor – kolor bazowy (np. ciemny) ──
+            var pathBase = new PathF();
+            pathBase.MoveTo(0, 0);
+            pathBase.AddArc(-r, -r, r, r, startAngle, startAngle + SectorAngle, false);
+            pathBase.LineTo(0, 0);
+            pathBase.Close();
+            canvas.FillColor = Color.FromArgb("#1A1A1A"); // bazowy kolor dla wszystkich
+            canvas.FillPath(pathBase);
+
+            // ── Końcówka sektora – właściwy kolor ──
+            var pathTip = new PathF();
+            pathTip.AddArc(-innerColorRadius, -innerColorRadius, innerColorRadius, innerColorRadius,
+                           startAngle, startAngle + SectorAngle, false);
+            pathTip.AddArc(-r, -r, r, r,
+                           startAngle + SectorAngle, startAngle, true);
+            pathTip.Close();
+            canvas.FillColor = fill; // czerwony / czarny / zielony
+            canvas.FillPath(pathTip);
+            // ── Linia oddzielająca bazę od końcówki ──
+            canvas.StrokeColor = Color.FromArgb("#D4AF37"); // złoty
+            canvas.StrokeSize = outerRadius * 0.008f;
+            canvas.DrawArc(-innerColorRadius, -innerColorRadius,
+                           innerColorRadius * 2, innerColorRadius * 2,
+                           startAngle, startAngle + SectorAngle, false, false);
         }
 
         // ── 3. Dekoracyjne pierścienie ───────────────────────────────────────
