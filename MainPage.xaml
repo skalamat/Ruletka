@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Ruletka.MainPage" HeightRequest="900" WidthRequest="800">
+             x:Class="Ruletka.MainPage" HeightRequest="900" WidthRequest="900">
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#1E2F40" Offset="0.0" />
@@ -15,8 +15,8 @@
             <Setter Property="HorizontalOptions" Value="Fill" />
         </Style>
     </ContentPage.Resources>
-    
-    
+
+
     <ScrollView>
 
         <StackLayout>
@@ -33,20 +33,58 @@
                     </HorizontalStackLayout>
                 </Border>
 
+                <Border Background="SlateGray" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
+                        VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                    <HorizontalStackLayout>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" x:Name="balance_label">Saldo:</Label>
+                    </HorizontalStackLayout>
+                </Border>
+
+                <Border Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
+                        VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                    <HorizontalStackLayout x:Name="account" >
+                        <Image Source="konto.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0" HorizontalOptions="Center"/>
+                    </HorizontalStackLayout>
+                </Border>
+
             </Grid>
             <BoxView Style="{StaticResource BottomLineStyle}"></BoxView>
             <Grid>
-            
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="500"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0">
+                <!--KOŁO RULETKI-->
+                <StackLayout Grid.Column="0" Padding="20">
+                    <VerticalStackLayout Background="SlateGray" WidthRequest="460" Padding="10">
+
+                        <Label VerticalOptions="Center" Margin="10,10,10,4" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay">Koło Ruletki</Label>
+
+                        <!-- GraphicsView – tutaj rysowane jest koło -->
+                        <GraphicsView x:Name="WheelView"
+                                      HeightRequest="340"
+                                      WidthRequest="340"
+                                      HorizontalOptions="Center"
+                                      Margin="0,8,0,8"/>
+
+                        <!-- Przyciski -->
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
+                            <Button x:Name="SpinButton"
+                                    Text="🎰 Zakręć kołem"
+                                    Background="Maroon"
+                                    FontAttributes="Bold"
+                                    Clicked="OnSpinClicked"/>
+                            <Button Text="Usuń zakłady"
+                                    Background="DarkGray"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
                 </StackLayout>
                 <StackLayout Grid.Column="1"></StackLayout>
             </Grid>
-            
+
         </StackLayout>
     </ScrollView>
 
