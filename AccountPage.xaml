@@ -2,8 +2,35 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Ruletka.AccountPage"
-             Title="AccountPage">
-    <VerticalStackLayout>
-        <Button Text="Wróc" x:Name="return" Clicked="return_Clicked"></Button>
-    </VerticalStackLayout>
+             Title="AccountPage" WidthRequest="600">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E2F40" Offset="0.0" />
+            <GradientStop Color="Black" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    <ContentPage.Resources>
+        <Style x:Key="BottomLineStyle" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="1" />
+            <Setter Property="Color" Value="#546373" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <Grid Background="#0A0F1C" HeightRequest="60" Padding="0,10,0,0" VerticalOptions="Start">
+            <VerticalStackLayout>
+                <Border StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8" HeightRequest="45" VerticalOptions="Center" Margin="3" WidthRequest="100" HorizontalOptions="Start" x:Name="ReturnBorder">
+                    <Border.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="ReturnHoverEntered" PointerExited="ReturnHoverExited"/>
+                    </Border.GestureRecognizers>
+                    <Button Text="Wróc" x:Name="ReturnButton" Clicked="return_Clicked" Background="SlateGray" TextColor="#F9F6EE"></Button>
+                </Border>
+
+                <Entry></Entry>
+                <Entry></Entry>
+            </VerticalStackLayout>
+        </Grid>
+        <BoxView Style="{StaticResource BottomLineStyle}"></BoxView>
+
+    </StackLayout>
 </ContentPage>

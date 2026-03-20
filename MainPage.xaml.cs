@@ -66,14 +66,25 @@
         {
             Navigation.PushAsync(new AccountPage());
         }
+
+        //HOOVER
         private void AccountHoverEntered(object? sender, PointerEventArgs e)
         {
-            AccountBorder.Background = new SolidColorBrush(Colors.LightGray);
+            AccountBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0"));  
         }
-
         private void AccountHoverExited(object? sender, PointerEventArgs e)
         {
             AccountBorder.Background = new SolidColorBrush(Colors.SlateGray);
+        }
+
+        private void SpinButton_OnPointerEntered(object sender, PointerEventArgs e)
+        {
+            SpinButton.BackgroundColor = Colors.Red; 
+        }
+
+        private void SpinButton_OnPointerExited(object sender, PointerEventArgs e)
+        {
+            SpinButton.BackgroundColor = Colors.Maroon; 
         }
     }
 }
