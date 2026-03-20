@@ -6,11 +6,148 @@
         private float _currentAngle = 0f;
         private bool _isSpinning = false;
 
+        public double balance = 0;
+        public double chosen_chip_value = 0;
+
+        public double current_bet = 0; // ?
+
         public MainPage()
         {
             InitializeComponent();
             WheelView.Drawable = _drawable;
+            balance_label.Text = Math.Round(balance, 2).ToString() + "$";
         }
+        private void AccountTapped(object sender, TappedEventArgs e)
+        {
+            Navigation.PushAsync(new AccountPage());
+        }
+        private async void OnSpinClicked(object? sender, EventArgs e)
+        {
+            // Tutaj podłącz swoją logikę – wylicz targetAngle i wywołaj SpinToAngle()
+            // Przykład: await SpinToAngle(someAngle);
+            await SpinToAngle(Random.Shared.NextSingle() * 360f);
+        }
+        #region żetony
+        private void Bet1DollarButton_Clicked(object sender, EventArgs e)
+        {
+            chosen_chip_value = 1;
+        }
+
+        private void Bet5DollarButton_Clicked(object sender, EventArgs e)
+        {
+            chosen_chip_value = 5;
+
+        }
+
+        private void Bet25DollarButton_Clicked(object sender, EventArgs e)
+        {
+            chosen_chip_value = 25;
+
+        }
+
+        private void Bet50DollarButton_Clicked(object sender, EventArgs e)
+        {
+            chosen_chip_value = 50;
+
+        }
+
+        private void Bet100DollarButton_Clicked(object sender, EventArgs e)
+        {
+            chosen_chip_value = 100;
+
+        }
+
+        private void Bet500DollarButton_Clicked(object sender, EventArgs e)
+        {
+            chosen_chip_value = 500;
+
+        }
+        #endregion
+
+        #region zakłady
+        private void Bet0Button_Clicked(object sender, EventArgs e)
+        {
+            double current_bet_on_0 = 0;
+
+            if (chosen_chip_value == 0)
+            {
+                DisplayAlert("Błąd", "Wybierz wartość żetonu przed postawieniem zakładu.", "OK");
+            }
+            else if(chosen_chip_value == 1) 
+            {
+                current_bet_on_0 += 1;
+            }
+            else if (chosen_chip_value == 5)
+            {
+                current_bet_on_0 += 5;
+            }
+            else if (chosen_chip_value == 25)
+            {
+                current_bet_on_0 += 25;
+            }
+            else if (chosen_chip_value == 50)
+            {
+                current_bet_on_0 += 50;
+            }
+            else if (chosen_chip_value == 100)
+            {
+                current_bet_on_0 += 100;
+            }
+            else if (chosen_chip_value == 500)
+            {
+                current_bet_on_0 += 500;
+            }
+
+        }
+     
+        private void Bet3Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Bet2Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Bet1Button_Clicked(object sender, EventArgs e)
+        {
+
+        }
+        private void Bet4Button_Clicked(object sender, EventArgs e) { }
+        private void Bet5Button_Clicked(object sender, EventArgs e) { }
+        private void Bet6Button_Clicked(object sender, EventArgs e) { }
+        private void Bet7Button_Clicked(object sender, EventArgs e) { }
+        private void Bet8Button_Clicked(object sender, EventArgs e) { }
+        private void Bet9Button_Clicked(object sender, EventArgs e) { }
+        private void Bet10Button_Clicked(object sender, EventArgs e) { }
+        private void Bet11Button_Clicked(object sender, EventArgs e) { }
+        private void Bet12Button_Clicked(object sender, EventArgs e) { }
+        private void Bet13Button_Clicked(object sender, EventArgs e) { }
+        private void Bet14Button_Clicked(object sender, EventArgs e) { }
+        private void Bet15Button_Clicked(object sender, EventArgs e) { }
+        private void Bet16Button_Clicked(object sender, EventArgs e) { }
+        private void Bet17Button_Clicked(object sender, EventArgs e) { }
+        private void Bet18Button_Clicked(object sender, EventArgs e) { }
+        private void Bet19Button_Clicked(object sender, EventArgs e) { }
+        private void Bet20Button_Clicked(object sender, EventArgs e) { }
+        private void Bet21Button_Clicked(object sender, EventArgs e) { }
+        private void Bet22Button_Clicked(object sender, EventArgs e) { }
+        private void Bet23Button_Clicked(object sender, EventArgs e) { }
+        private void Bet24Button_Clicked(object sender, EventArgs e) { }
+        private void Bet25Button_Clicked(object sender, EventArgs e) { }
+        private void Bet26Button_Clicked(object sender, EventArgs e) { }
+        private void Bet27Button_Clicked(object sender, EventArgs e) { }
+        private void Bet28Button_Clicked(object sender, EventArgs e) { }
+        private void Bet29Button_Clicked(object sender, EventArgs e) { }
+        private void Bet30Button_Clicked(object sender, EventArgs e) { }
+        private void Bet31Button_Clicked(object sender, EventArgs e) { }
+        private void Bet32Button_Clicked(object sender, EventArgs e) { }
+        private void Bet33Button_Clicked(object sender, EventArgs e) { }
+        private void Bet34Button_Clicked(object sender, EventArgs e) { }
+        private void Bet35Button_Clicked(object sender, EventArgs e) { }
+        private void Bet36Button_Clicked(object sender, EventArgs e) { }
+        #endregion
 
         #region koło ruletki
 
@@ -31,13 +168,6 @@
 
             SpinButton.IsEnabled = true;
             _isSpinning = false;
-        }
-
-        private async void OnSpinClicked(object? sender, EventArgs e)
-        {
-            // Tutaj podłącz swoją logikę – wylicz targetAngle i wywołaj SpinToAngle()
-            // Przykład: await SpinToAngle(someAngle);
-            await SpinToAngle(Random.Shared.NextSingle() * 360f);
         }
 
         private async Task AnimateWheel(float fromAngle, float toAngle, int durationMs)
@@ -541,13 +671,8 @@
         {
             Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00");
         }
+
+
         #endregion
-
-        private void AccountTapped(object sender, TappedEventArgs e)
-        {
-            Navigation.PushAsync(new AccountPage());
-        }
-
-        
     }
 }

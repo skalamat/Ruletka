@@ -38,8 +38,8 @@
                 <Border Background="#36404A" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
                         VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
                     <HorizontalStackLayout>
-                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Saldo:</Label>
-                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" x:Name="balance_label"></Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="60" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Saldo:</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="140" FontAttributes="Bold" FontSize="20"  x:Name="balance_label"></Label>
                     </HorizontalStackLayout>
                 </Border>
 
@@ -120,211 +120,211 @@
                                 </Grid.RowDefinitions>
                                 
                                 <!--ZIELONE-->
-                                <Button Grid.Column="0" Grid.Row="1" Text="0" BackgroundColor="Green" Padding="0" TextColor="White" x:Name="Bet0Button">
+                                <Button Grid.Column="0" Grid.Row="1" Text="0" BackgroundColor="Green" Padding="0" TextColor="White" x:Name="Bet0Button" Clicked="Bet0Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet0Button_OnPointerEntered" PointerExited="Bet0Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--1 KOLUMNA-->
-                                <Button Grid.Column="1" Grid.Row="0" Text="3" BackgroundColor="#B81304" TextColor="White" x:Name="Bet3Button">
+                                <Button Grid.Column="1" Grid.Row="0" Text="3" BackgroundColor="#B81304" TextColor="White" x:Name="Bet3Button" Clicked="Bet3Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet3Button_OnPointerEntered" PointerExited="Bet3Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="1" Grid.Row="1" Text="2" BackgroundColor="#242424" TextColor="White" x:Name="Bet2Button">
+                                <Button Grid.Column="1" Grid.Row="1" Text="2" BackgroundColor="#242424" TextColor="White" x:Name="Bet2Button" Clicked="Bet2Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet2Button_OnPointerEntered" PointerExited="Bet2Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="1" Grid.Row="2" Text="1" BackgroundColor="#B81304" TextColor="White" x:Name="Bet1Button">
+                                <Button Grid.Column="1" Grid.Row="2" Text="1" BackgroundColor="#B81304" TextColor="White" x:Name="Bet1Button" Clicked="Bet1Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet1Button_OnPointerEntered" PointerExited="Bet1Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--2 KOLUMNA-->
-                                <Button Grid.Column="2" Grid.Row="0" Text="6" BackgroundColor="#242424" TextColor="White" x:Name="Bet6Button">
+                                <Button Grid.Column="2" Grid.Row="0" Text="6" BackgroundColor="#242424" TextColor="White" x:Name="Bet6Button" Clicked="Bet6Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet6Button_OnPointerEntered" PointerExited="Bet6Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="2" Grid.Row="1" Text="5" BackgroundColor="#B81304" TextColor="White" x:Name="Bet5Button">
+                                <Button Grid.Column="2" Grid.Row="1" Text="5" BackgroundColor="#B81304" TextColor="White" x:Name="Bet5Button" Clicked="Bet5Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet5Button_OnPointerEntered" PointerExited="Bet5Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="2" Grid.Row="2" Text="4" BackgroundColor="#242424" TextColor="White" x:Name="Bet4Button">
+                                <Button Grid.Column="2" Grid.Row="2" Text="4" BackgroundColor="#242424" TextColor="White" x:Name="Bet4Button" Clicked="Bet4Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet4Button_OnPointerEntered" PointerExited="Bet4Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--3 KOLUMNA-->
-                                <Button Grid.Column="3" Grid.Row="0" Text="9" BackgroundColor="#B81304" TextColor="White" x:Name="Bet9Button">
+                                <Button Grid.Column="3" Grid.Row="0" Text="9" BackgroundColor="#B81304" TextColor="White" x:Name="Bet9Button" Clicked="Bet9Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet9Button_OnPointerEntered" PointerExited="Bet9Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="3" Grid.Row="1" Text="8" BackgroundColor="#242424" TextColor="White" x:Name="Bet8Button">
+                                <Button Grid.Column="3" Grid.Row="1" Text="8" BackgroundColor="#242424" TextColor="White" x:Name="Bet8Button" Clicked="Bet8Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet8Button_OnPointerEntered" PointerExited="Bet8Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="3" Grid.Row="2" Text="7" BackgroundColor="#B81304" TextColor="White" x:Name="Bet7Button">
+                                <Button Grid.Column="3" Grid.Row="2" Text="7" BackgroundColor="#B81304" TextColor="White" x:Name="Bet7Button" Clicked="Bet7Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet7Button_OnPointerEntered" PointerExited="Bet7Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--4 KOLUMNA-->
-                                <Button Grid.Column="4" Grid.Row="0" Text="12" BackgroundColor="#242424" TextColor="White" x:Name="Bet12Button">
+                                <Button Grid.Column="4" Grid.Row="0" Text="12" BackgroundColor="#242424" TextColor="White" x:Name="Bet12Button" Clicked="Bet12Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet12Button_OnPointerEntered" PointerExited="Bet12Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="4" Grid.Row="1" Text="11" BackgroundColor="#B81304" TextColor="White" x:Name="Bet11Button">
+                                <Button Grid.Column="4" Grid.Row="1" Text="11" BackgroundColor="#B81304" TextColor="White" x:Name="Bet11Button" Clicked="Bet11Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet11Button_OnPointerEntered" PointerExited="Bet11Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="4" Grid.Row="2" Text="10" BackgroundColor="#242424" TextColor="White" x:Name="Bet10Button">
+                                <Button Grid.Column="4" Grid.Row="2" Text="10" BackgroundColor="#242424" TextColor="White" x:Name="Bet10Button" Clicked="Bet10Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet10Button_OnPointerEntered" PointerExited="Bet10Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--5 KOLUMNA-->
-                                <Button Grid.Column="5" Grid.Row="0" Text="15" BackgroundColor="#B81304" TextColor="White" x:Name="Bet15Button">
+                                <Button Grid.Column="5" Grid.Row="0" Text="15" BackgroundColor="#B81304" TextColor="White" x:Name="Bet15Button" Clicked="Bet15Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet15Button_OnPointerEntered" PointerExited="Bet15Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="5" Grid.Row="1" Text="14" BackgroundColor="#242424" TextColor="White" x:Name="Bet14Button">
+                                <Button Grid.Column="5" Grid.Row="1" Text="14" BackgroundColor="#242424" TextColor="White" x:Name="Bet14Button" Clicked="Bet14Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet14Button_OnPointerEntered" PointerExited="Bet14Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="5" Grid.Row="2" Text="13" BackgroundColor="#B81304" TextColor="White" x:Name="Bet13Button">
+                                <Button Grid.Column="5" Grid.Row="2" Text="13" BackgroundColor="#B81304" TextColor="White" x:Name="Bet13Button" Clicked="Bet13Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet13Button_OnPointerEntered" PointerExited="Bet13Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--6 KOLUMNA-->
-                                <Button Grid.Column="6" Grid.Row="0" Text="18" BackgroundColor="#242424" TextColor="White" x:Name="Bet18Button">
+                                <Button Grid.Column="6" Grid.Row="0" Text="18" BackgroundColor="#242424" TextColor="White" x:Name="Bet18Button" Clicked="Bet18Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet18Button_OnPointerEntered" PointerExited="Bet18Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="6" Grid.Row="1" Text="17" BackgroundColor="#B81304" TextColor="White" x:Name="Bet17Button">
+                                <Button Grid.Column="6" Grid.Row="1" Text="17" BackgroundColor="#B81304" TextColor="White" x:Name="Bet17Button" Clicked="Bet17Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet17Button_OnPointerEntered" PointerExited="Bet17Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="6" Grid.Row="2" Text="16" BackgroundColor="#242424" TextColor="White" x:Name="Bet16Button">
+                                <Button Grid.Column="6" Grid.Row="2" Text="16" BackgroundColor="#242424" TextColor="White" x:Name="Bet16Button" Clicked="Bet16Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet16Button_OnPointerEntered" PointerExited="Bet16Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--7 KOLUMNA-->
-                                <Button Grid.Column="7" Grid.Row="0" Text="21" BackgroundColor="#B81304" TextColor="White" x:Name="Bet21Button">
+                                <Button Grid.Column="7" Grid.Row="0" Text="21" BackgroundColor="#B81304" TextColor="White" x:Name="Bet21Button" Clicked="Bet21Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet21Button_OnPointerEntered" PointerExited="Bet21Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="7" Grid.Row="1" Text="20" BackgroundColor="#242424" TextColor="White" x:Name="Bet20Button">
+                                <Button Grid.Column="7" Grid.Row="1" Text="20" BackgroundColor="#242424" TextColor="White" x:Name="Bet20Button" Clicked="Bet20Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet20Button_OnPointerEntered" PointerExited="Bet20Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="7" Grid.Row="2" Text="19" BackgroundColor="#B81304" TextColor="White" x:Name="Bet19Button">
+                                <Button Grid.Column="7" Grid.Row="2" Text="19" BackgroundColor="#B81304" TextColor="White" x:Name="Bet19Button" Clicked="Bet19Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet19Button_OnPointerEntered" PointerExited="Bet19Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--8 KOLUMNA-->
-                                <Button Grid.Column="8" Grid.Row="0" Text="24" BackgroundColor="#242424" TextColor="White" x:Name="Bet24Button">
+                                <Button Grid.Column="8" Grid.Row="0" Text="24" BackgroundColor="#242424" TextColor="White" x:Name="Bet24Button" Clicked="Bet24Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet24Button_OnPointerEntered" PointerExited="Bet24Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="8" Grid.Row="1" Text="23" BackgroundColor="#B81304" TextColor="White" x:Name="Bet23Button">
+                                <Button Grid.Column="8" Grid.Row="1" Text="23" BackgroundColor="#B81304" TextColor="White" x:Name="Bet23Button" Clicked="Bet23Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet23Button_OnPointerEntered" PointerExited="Bet23Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="8" Grid.Row="2" Text="22" BackgroundColor="#242424" TextColor="White" x:Name="Bet22Button">
+                                <Button Grid.Column="8" Grid.Row="2" Text="22" BackgroundColor="#242424" TextColor="White" x:Name="Bet22Button" Clicked="Bet22Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet22Button_OnPointerEntered" PointerExited="Bet22Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--9 KOLUMNA-->
-                                <Button Grid.Column="9" Grid.Row="0" Text="27" BackgroundColor="#B81304" TextColor="White" x:Name="Bet27Button">
+                                <Button Grid.Column="9" Grid.Row="0" Text="27" BackgroundColor="#B81304" TextColor="White" x:Name="Bet27Button" Clicked="Bet27Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet27Button_OnPointerEntered" PointerExited="Bet27Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="9" Grid.Row="1" Text="26" BackgroundColor="#242424" TextColor="White" x:Name="Bet26Button">
+                                <Button Grid.Column="9" Grid.Row="1" Text="26" BackgroundColor="#242424" TextColor="White" x:Name="Bet26Button" Clicked="Bet26Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet26Button_OnPointerEntered" PointerExited="Bet26Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="9" Grid.Row="2" Text="25" BackgroundColor="#B81304" TextColor="White" x:Name="Bet25Button">
+                                <Button Grid.Column="9" Grid.Row="2" Text="25" BackgroundColor="#B81304" TextColor="White" x:Name="Bet25Button" Clicked="Bet25Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet25Button_OnPointerEntered" PointerExited="Bet25Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--10 KOLUMNA-->
-                                <Button Grid.Column="10" Grid.Row="0" Text="30" BackgroundColor="#242424" TextColor="White" x:Name="Bet30Button">
+                                <Button Grid.Column="10" Grid.Row="0" Text="30" BackgroundColor="#242424" TextColor="White" x:Name="Bet30Button" Clicked="Bet30Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet30Button_OnPointerEntered" PointerExited="Bet30Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="10" Grid.Row="1" Text="29" BackgroundColor="#B81304" TextColor="White" x:Name="Bet29Button">
+                                <Button Grid.Column="10" Grid.Row="1" Text="29" BackgroundColor="#B81304" TextColor="White" x:Name="Bet29Button" Clicked="Bet29Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet29Button_OnPointerEntered" PointerExited="Bet29Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="10" Grid.Row="2" Text="28" BackgroundColor="#242424" TextColor="White" x:Name="Bet28Button">
+                                <Button Grid.Column="10" Grid.Row="2" Text="28" BackgroundColor="#242424" TextColor="White" x:Name="Bet28Button" Clicked="Bet28Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet28Button_OnPointerEntered" PointerExited="Bet28Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--11 KOLUMNA-->
-                                <Button Grid.Column="11" Grid.Row="0" Text="33" BackgroundColor="#B81304" TextColor="White" x:Name="Bet33Button">
+                                <Button Grid.Column="11" Grid.Row="0" Text="33" BackgroundColor="#B81304" TextColor="White" x:Name="Bet33Button" Clicked="Bet33Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet33Button_OnPointerEntered" PointerExited="Bet33Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="11" Grid.Row="1" Text="32" BackgroundColor="#242424" TextColor="White" x:Name="Bet32Button">
+                                <Button Grid.Column="11" Grid.Row="1" Text="32" BackgroundColor="#242424" TextColor="White" x:Name="Bet32Button" Clicked="Bet32Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet32Button_OnPointerEntered" PointerExited="Bet32Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="11" Grid.Row="2" Text="31" BackgroundColor="#B81304" TextColor="White" x:Name="Bet31Button">
+                                <Button Grid.Column="11" Grid.Row="2" Text="31" BackgroundColor="#B81304" TextColor="White" x:Name="Bet31Button" Clicked="Bet31Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet31Button_OnPointerEntered" PointerExited="Bet31Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
 
                                 <!--12 KOLUMNA-->
-                                <Button Grid.Column="12" Grid.Row="0" Text="36" BackgroundColor="#242424" TextColor="White" x:Name="Bet36Button">
+                                <Button Grid.Column="12" Grid.Row="0" Text="36" BackgroundColor="#242424" TextColor="White" x:Name="Bet36Button" Clicked="Bet36Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet36Button_OnPointerEntered" PointerExited="Bet36Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="12" Grid.Row="1" Text="35" BackgroundColor="#B81304" TextColor="White" x:Name="Bet35Button">
+                                <Button Grid.Column="12" Grid.Row="1" Text="35" BackgroundColor="#B81304" TextColor="White" x:Name="Bet35Button" Clicked="Bet35Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet35Button_OnPointerEntered" PointerExited="Bet35Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
                                 </Button>
-                                <Button Grid.Column="12" Grid.Row="2" Text="34" BackgroundColor="#242424" TextColor="White" x:Name="Bet34Button">
+                                <Button Grid.Column="12" Grid.Row="2" Text="34" BackgroundColor="#242424" TextColor="White" x:Name="Bet34Button" Clicked="Bet34Button_Clicked">
                                     <Button.GestureRecognizers>
                                         <PointerGestureRecognizer PointerEntered="Bet34Button_OnPointerEntered" PointerExited="Bet34Button_OnPointerExited"/>
                                     </Button.GestureRecognizers>
@@ -358,7 +358,7 @@
 
                             <HorizontalStackLayout>
                                 <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
-                                    <Button Text="1$" WidthRequest="70" BackgroundColor="#8342B8" TextColor="White" x:Name="Bet1DollarButton">
+                                    <Button Text="1$" WidthRequest="70" BackgroundColor="#8342B8" TextColor="White" x:Name="Bet1DollarButton" Clicked="Bet1DollarButton_Clicked">
                                         <Button.GestureRecognizers>
                                             <PointerGestureRecognizer PointerEntered="Bet1DollarButton_OnPointerEntered" PointerExited="Bet1DollarButton_OnPointerExited"/>
                                         </Button.GestureRecognizers>
@@ -366,7 +366,7 @@
                                 </Border>
 
                                 <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
-                                    <Button Text="5$" WidthRequest="70" BackgroundColor="#B0130B" TextColor="White" x:Name="Bet5DollarButton">
+                                    <Button Text="5$" WidthRequest="70" BackgroundColor="#B0130B" TextColor="White" x:Name="Bet5DollarButton" Clicked="Bet5DollarButton_Clicked">
                                         <Button.GestureRecognizers>
                                             <PointerGestureRecognizer PointerEntered="Bet5DollarButton_OnPointerEntered" PointerExited="Bet5DollarButton_OnPointerExited"/>
                                         </Button.GestureRecognizers>
@@ -374,7 +374,7 @@
                                 </Border>
 
                                 <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
-                                    <Button Text="25$" WidthRequest="70" BackgroundColor="#22740B" TextColor="White" x:Name="Bet25DollarButton">
+                                    <Button Text="25$" WidthRequest="70" BackgroundColor="#22740B" TextColor="White" x:Name="Bet25DollarButton" Clicked="Bet25DollarButton_Clicked">
                                         <Button.GestureRecognizers>
                                             <PointerGestureRecognizer PointerEntered="Bet25DollarButton_OnPointerEntered" PointerExited="Bet25DollarButton_OnPointerExited"/>
                                         </Button.GestureRecognizers>
@@ -384,7 +384,7 @@
 
                             <HorizontalStackLayout>
                                 <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
-                                    <Button Text="50$" WidthRequest="70" BackgroundColor="#BFAC00" TextColor="White" x:Name="Bet50DollarButton">
+                                    <Button Text="50$" WidthRequest="70" BackgroundColor="#BFAC00" TextColor="White" x:Name="Bet50DollarButton" Clicked="Bet50DollarButton_Clicked">
                                         <Button.GestureRecognizers>
                                             <PointerGestureRecognizer PointerEntered="Bet50DollarButton_OnPointerEntered" PointerExited="Bet50DollarButton_OnPointerExited"/>
                                         </Button.GestureRecognizers>
@@ -392,7 +392,7 @@
                                 </Border>
 
                                 <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
-                                    <Button Text="100$" WidthRequest="70" BackgroundColor="#CC66D0" TextColor="White" x:Name="Bet100DollarButton">
+                                    <Button Text="100$" WidthRequest="70" BackgroundColor="#CC66D0" TextColor="White" x:Name="Bet100DollarButton" Clicked="Bet100DollarButton_Clicked">
                                         <Button.GestureRecognizers>
                                             <PointerGestureRecognizer PointerEntered="Bet100DollarButton_OnPointerEntered" PointerExited="Bet100DollarButton_OnPointerExited"/>
                                         </Button.GestureRecognizers>
@@ -400,7 +400,7 @@
                                 </Border>
 
                                 <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
-                                    <Button Text="500$" WidthRequest="70" BackgroundColor="#E86C00" TextColor="White" x:Name="Bet500DollarButton">
+                                    <Button Text="500$" WidthRequest="70" BackgroundColor="#E86C00" TextColor="White" x:Name="Bet500DollarButton" Clicked="Bet500DollarButton_Clicked">
                                         <Button.GestureRecognizers>
                                             <PointerGestureRecognizer PointerEntered="Bet500DollarButton_OnPointerEntered" PointerExited="Bet500DollarButton_OnPointerExited"/>
                                         </Button.GestureRecognizers>
