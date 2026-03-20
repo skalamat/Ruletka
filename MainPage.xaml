@@ -26,25 +26,25 @@
             <!--HEADER-->
             <Grid Background="#0A0F1C" HeightRequest="60" Padding="0,10,0,0">
 
-                <Border Background="SlateGray" WidthRequest="200" HeightRequest="40" HorizontalOptions="Start" 
-                        VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                <Border Background="#36404A" WidthRequest="200" HeightRequest="40" HorizontalOptions="Start" 
+                        VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
 
                     <HorizontalStackLayout>
                         <Image Source="ruletka.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0"/>
-                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="22" FontFamily="PlayfairDisplay">Ruletka</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="22" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Ruletka</Label>
                     </HorizontalStackLayout>
                 </Border>
 
-                <Border Background="SlateGray" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
-                        VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                <Border Background="#36404A" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
+                        VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
                     <HorizontalStackLayout>
-                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" >Saldo:</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Saldo:</Label>
                         <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" x:Name="balance_label"></Label>
                     </HorizontalStackLayout>
                 </Border>
 
                 <Border x:Name="AccountBorder" Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
-                    VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                    VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="AccountTapped"/>
                         <PointerGestureRecognizer PointerEntered="AccountHoverEntered" PointerExited="AccountHoverExited"/>
@@ -66,11 +66,11 @@
                 <!--LEWA STRONA-->
                 <StackLayout Grid.Column="0" Padding="20">
                     <!--KOŁO RULETKI-->
-                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,0,0,15">
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,0,0,15">
 
                         <VerticalStackLayout>
 
-                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" HorizontalOptions="Center">Koło Ruletki</Label>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" HorizontalOptions="Center" TextColor="#F9F6EE">Koło Ruletki</Label>
 
                             <!-- GraphicsView – tutaj rysowane jest koło -->
                             <GraphicsView x:Name="WheelView" HeightRequest="340" WidthRequest="340" HorizontalOptions="Center" Margin="0,8,0,8"/>
@@ -87,9 +87,9 @@
 
                     </Border>
                     <!--ZAKŁADY-->
-                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10">
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10">
                         <VerticalStackLayout>
-                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Zakłady</Label>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Zakłady</Label>
                             <Grid RowSpacing="2" ColumnSpacing="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition ></ColumnDefinition>
@@ -189,27 +189,46 @@
                 <!--PRAWA STRONA-->
                 <StackLayout Grid.Column="1" Padding="20">
                     <!--ŻETONY-->
-                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10">
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10">
                         <VerticalStackLayout>
-                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Żetony</Label>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Żetony</Label>
 
                             <HorizontalStackLayout>
-                                <Button Text="1$"></Button>
-                                <Button Text="5$"></Button>
-                                <Button Text="25$"></Button>
+                                
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="1$" WidthRequest="70" Background="#8342B8" TextColor="White"></Button>
+                                </Border>
+                                
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center"  Margin="3">
+                                    <Button Text="5$" WidthRequest="70" Background="#B0130B" TextColor="White"></Button>
+                                </Border>
+                                
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center"  Margin="3">
+                                    <Button Text="25$" WidthRequest="70" Background="#22740B" TextColor="White"></Button>
+                                </Border>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout>
-                                <Button Text="50$"></Button>
-                                <Button Text="100$"></Button>
-                                <Button Text="500$"></Button>
+                                
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="50$" WidthRequest="70" Background="#BFAC00" TextColor="White"></Button>
+                                </Border>
+                                
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="100$" WidthRequest="70" Background="#CC66D0" TextColor="White"></Button>
+                                </Border>
+                                
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="500$" WidthRequest="70" Background="#E86C00" TextColor="White"></Button>
+                                </Border>
+                                
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
                     <!--ZAKŁAD-INFO-->
-                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
                         <VerticalStackLayout>
-                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Obecny zakład</Label>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Obecny zakład</Label>
 
                             <Border Background="LightGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Margin="0,5,0,0">
                                 <HorizontalStackLayout HeightRequest="30">
@@ -227,38 +246,38 @@
                             <BoxView Style="{StaticResource BottomLineStyle}" Margin="0,10,0,0" Color="Black" HeightRequest="2"></BoxView>
 
                             <HorizontalStackLayout>
-                                <Label FontSize="16" FontFamily="PlayfairDisplay" HorizontalOptions="Start" Margin="4">Łączny zakład:</Label>
+                                <Label FontSize="16" FontFamily="PlayfairDisplay" HorizontalOptions="Start" Margin="4" TextColor="#F9F6EE">Łączny zakład:</Label>
                                 <Label x:Name="total_current_bet"></Label>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
 
                     <!--STATYSTYKI GRY-->
-                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
                         <VerticalStackLayout>
-                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Statystyki gry</Label>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Statystyki gry</Label>
 
                             <HorizontalStackLayout>
-                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0">Zagrane gry:</Label>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Zagrane gry:</Label>
                                 <Label x:Name="games_playes_label"></Label>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout>
-                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0">Łączcna wygrana: </Label>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Łączcna wygrana: </Label>
                                 <Label x:Name="total_cash_won_label"></Label>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout>
-                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0">Wygrane gry:</Label>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Wygrane gry:</Label>
                                 <Label x:Name="games_won_label"></Label>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
                     
                     <!--HISTORIA-->
-                    <Border Background="SlateGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
                         <VerticalStackLayout>
-                            <Label  Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start">Ostatnie zakłady</Label>
+                            <Label  Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Ostatnie zakłady</Label>
                             
                         </VerticalStackLayout>
                     </Border>   
