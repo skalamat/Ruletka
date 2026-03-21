@@ -74,8 +74,7 @@
 
                             <GraphicsView x:Name="WheelView" HeightRequest="340" WidthRequest="340" HorizontalOptions="Center" Margin="0,8,0,8"/>
 
-                            <Label x:Name="result_label"></Label>
-                            <Label x:Name="result_lost_label"></Label>
+                            <Label x:Name="result_label" FontFamily="PlayfairDisplay" HorizontalOptions="Center" FontSize="17" FontAttributes="Bold" Margin="0,0,0,10"></Label>
 
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
                                 <Button x:Name="SpinButton" Text="▶️ Zakręć kołem" BackgroundColor="Maroon" FontAttributes="Bold" Clicked="OnSpinClicked" TextColor="#F5F5F5">

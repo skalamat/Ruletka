@@ -6,7 +6,7 @@
         private float _currentAngle = 0f;
         private bool _isSpinning = false;
 
-        public double balance = 0;
+        public double balance = 500;
         public double chosen_chip_value = 0;
 
         double[] current_bet_on = new double[37];
@@ -14,7 +14,7 @@
         double current_bet_on_red = 0;
         double current_bet_on_black = 0;
 
-        public double current_bet = 0;
+        //public double current_bet = 0;
 
         private List<Grid> _betGrids;
 
@@ -54,22 +54,34 @@
 
         private async void OnSpinClicked(object? sender, EventArgs e)
         {
+            result_label.Text = "";
+            Random r = new Random();
+            int winning_number = r.Next(0, 37);
+            string winning_color;
+            bool is_bet_won = false;
+            double value_won = 0;
+            double current_bet = 0;
+            for (int i = 0; i <=36; i++)
+            {
+                current_bet += current_bet_on[i];
+            }
+            current_bet += current_bet_on_black + current_bet_on_red;
+
             if (!current_bet_on.Any(bet => bet > 0) && current_bet_on_black == 0 && current_bet_on_red == 0)
             {
                 result_label.Text = "Nie postawiono żadnego zakładu";
                 return;
             }
-
+            if (current_bet > balance)
+            {
+                DisplayAlert("Błąd", "Nie masz wystarczająco dużo środków, aby postawić ten zakład.", "OK");
+                return;
+            }
             await SpinToAngle(Random.Shared.NextSingle() * 360f);
 
-            result_lost_label.Text = "";
-            result_label.Text = "";
-            Random r = new Random();
-            int winning_number = r.Next(0,37);
-            string winning_color;
-            bool is_bet_won = false;
 
-            if(winning_number % 2 ==0)
+
+            if (winning_number % 2 ==0)
             {
                 winning_color = "czarny"; 
             }
@@ -78,14 +90,15 @@
                 winning_color = "czerwony";
             }
 
-            result_label.Text = $"Wylosowano numer {winning_number}, kolor {winning_color}";
+            result_label.Text = $"Wylosowano numer {winning_number}, kolor {winning_color}\n";
             for (int i = 0; i <=36; i++)
             {
-                if(current_bet_on[i] > 0)
+                if (current_bet_on[i] > 0)
                 {
                     if (winning_number == i)
                     {
                         result_label.Text += $"\nWygrałeś {current_bet_on[i] * 35}$ na numerze {i}!";
+                        value_won = current_bet_on[i] * 35;
                         is_bet_won = true;
                     }
                 }
@@ -95,18 +108,25 @@
                 if (winning_color == "czarny" && current_bet_on_black > 0)
                 {
                     result_label.Text += $"\nWygrałeś {current_bet_on_black * 2}$ na kolorze czarnym!";
+                    value_won = current_bet_on_black * 2;
                     is_bet_won = true;
                 }
                 else if (winning_color == "czerwony" && current_bet_on_red >0)
                 {
                     result_label.Text += $"\nWygrałeś {current_bet_on_red * 2}$ na kolorze czerwonym!";
+                    value_won = current_bet_on_red * 2;
                     is_bet_won = true;
                 }
             }
-            if(is_bet_won == false)
+            if (is_bet_won == false)
             {
-                result_lost_label.Text = "Przegrałeś zakład";
+                result_label.Text += $"\nPrzegrałeś {current_bet}$";
             }
+
+
+            balance -= current_bet;
+            balance += value_won;
+            balance_label.Text = Math.Round(balance, 2).ToString() + "$";
             await Task.Delay(1000);
             ClearBets();
         }
