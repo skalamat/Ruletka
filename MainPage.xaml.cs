@@ -54,32 +54,58 @@
 
         private async void OnSpinClicked(object? sender, EventArgs e)
         {
-            if (!current_bet_on.Any(bet => bet > 0))
+            if (!current_bet_on.Any(bet => bet > 0) && current_bet_on_black == 0 && current_bet_on_red == 0)
             {
-                result_label.Text = "Nie postawiono żadnegoi zakładu";
+                result_label.Text = "Nie postawiono żadnego zakładu";
                 return;
             }
 
             await SpinToAngle(Random.Shared.NextSingle() * 360f);
 
+            result_lost_label.Text = "";
             result_label.Text = "";
             Random r = new Random();
             int winning_number = r.Next(0,37);
+            string winning_color;
+            bool is_bet_won = false;
 
-            result_label.Text = $"Wylosowano numer {winning_number}";
+            if(winning_number % 2 ==0)
+            {
+                winning_color = "czarny"; 
+            }
+            else
+            {
+                winning_color = "czerwony";
+            }
+
+            result_label.Text = $"Wylosowano numer {winning_number}, kolor {winning_color}";
             for (int i = 0; i <=36; i++)
             {
                 if(current_bet_on[i] > 0)
                 {
-                    if(winning_number == i)
+                    if (winning_number == i)
                     {
                         result_label.Text += $"\nWygrałeś {current_bet_on[i] * 35}$ na numerze {i}!";
-                    }
-                    else
-                    {
-                        result_lost_label.Text = $"\nPrzegrałeś zakład";
+                        is_bet_won = true;
                     }
                 }
+            }
+            if (current_bet_on_black > 0 || current_bet_on_red > 0)
+            {
+                if (winning_color == "czarny" && current_bet_on_black > 0)
+                {
+                    result_label.Text += $"\nWygrałeś {current_bet_on_black * 2}$ na kolorze czarnym!";
+                    is_bet_won = true;
+                }
+                else if (winning_color == "czerwony" && current_bet_on_red >0)
+                {
+                    result_label.Text += $"\nWygrałeś {current_bet_on_red * 2}$ na kolorze czerwonym!";
+                    is_bet_won = true;
+                }
+            }
+            if(is_bet_won == false)
+            {
+                result_lost_label.Text = "Przegrałeś zakład";
             }
             await Task.Delay(1000);
             ClearBets();
@@ -91,12 +117,81 @@
         }
 
         #region żetony
-        private void Bet1DollarButton_Clicked(object sender, EventArgs e) { chosen_chip_value = 1; }
-        private void Bet5DollarButton_Clicked(object sender, EventArgs e) { chosen_chip_value = 5; }
-        private void Bet25DollarButton_Clicked(object sender, EventArgs e) { chosen_chip_value = 25; }
-        private void Bet50DollarButton_Clicked(object sender, EventArgs e) { chosen_chip_value = 50; }
-        private void Bet100DollarButton_Clicked(object sender, EventArgs e) { chosen_chip_value = 100; }
-        private void Bet500DollarButton_Clicked(object sender, EventArgs e) { chosen_chip_value = 500; }
+        private void Bet1DollarButton_Clicked(object sender, EventArgs e) 
+        { 
+            chosen_chip_value = 1;
+            Bet1DollarButton.BackgroundColor = Color.FromArgb("#B077E8");
+
+            Bet5DollarButton.BackgroundColor = Color.FromArgb("#B0130B");
+            Bet25DollarButton.BackgroundColor = Color.FromArgb("#22740B");
+            Bet50DollarButton.BackgroundColor = Color.FromArgb("#BFAC00");
+            Bet100DollarButton.BackgroundColor = Color.FromArgb("#CC66D0");
+            Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00");
+        }
+        private void Bet5DollarButton_Clicked(object sender, EventArgs e) 
+        { 
+            chosen_chip_value = 5;
+
+            Bet1DollarButton.BackgroundColor = Color.FromArgb("#8342B8");
+
+            Bet5DollarButton.BackgroundColor = Color.FromArgb("#FF7070");
+
+            Bet25DollarButton.BackgroundColor = Color.FromArgb("#22740B");
+            Bet50DollarButton.BackgroundColor = Color.FromArgb("#BFAC00");
+            Bet100DollarButton.BackgroundColor = Color.FromArgb("#CC66D0");
+            Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00");
+        }
+        private void Bet25DollarButton_Clicked(object sender, EventArgs e) 
+        {
+            chosen_chip_value = 25;
+
+            Bet1DollarButton.BackgroundColor = Color.FromArgb("#8342B8");
+            Bet5DollarButton.BackgroundColor = Color.FromArgb("#B0130B");
+
+            Bet25DollarButton.BackgroundColor = Color.FromArgb("#098D00");
+
+            Bet50DollarButton.BackgroundColor = Color.FromArgb("#BFAC00");
+            Bet100DollarButton.BackgroundColor = Color.FromArgb("#CC66D0");
+            Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00");
+        }
+        private void Bet50DollarButton_Clicked(object sender, EventArgs e) 
+        { 
+            chosen_chip_value = 50;
+
+            Bet1DollarButton.BackgroundColor = Color.FromArgb("#8342B8");
+            Bet5DollarButton.BackgroundColor = Color.FromArgb("#B0130B");
+            Bet25DollarButton.BackgroundColor = Color.FromArgb("#22740B");
+
+            Bet50DollarButton.BackgroundColor = Color.FromArgb("#F5DC00");
+
+            Bet100DollarButton.BackgroundColor = Color.FromArgb("#CC66D0");
+            Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00");
+        }
+        private void Bet100DollarButton_Clicked(object sender, EventArgs e) 
+        { 
+            chosen_chip_value = 100;
+
+            Bet1DollarButton.BackgroundColor = Color.FromArgb("#8342B8");
+            Bet5DollarButton.BackgroundColor = Color.FromArgb("#B0130B");
+            Bet25DollarButton.BackgroundColor = Color.FromArgb("#22740B");
+            Bet50DollarButton.BackgroundColor = Color.FromArgb("#BFAC00");
+
+            Bet100DollarButton.BackgroundColor = Color.FromArgb("#E89FEB");
+
+            Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00");
+        }
+        private void Bet500DollarButton_Clicked(object sender, EventArgs e) 
+        { 
+            chosen_chip_value = 500;
+
+            Bet1DollarButton.BackgroundColor = Color.FromArgb("#8342B8");
+            Bet5DollarButton.BackgroundColor = Color.FromArgb("#B0130B");
+            Bet25DollarButton.BackgroundColor = Color.FromArgb("#22740B");
+            Bet50DollarButton.BackgroundColor = Color.FromArgb("#BFAC00");
+            Bet100DollarButton.BackgroundColor = Color.FromArgb("#CC66D0");
+            
+            Bet500DollarButton.BackgroundColor = Color.FromArgb("#FFB066");
+        }
         #endregion
 
         #region zakłady
@@ -490,17 +585,41 @@
         private void BetBlackButton_OnPointerExited(object sender, PointerEventArgs e) { BetBlackButton.BackgroundColor = Color.FromArgb("#242424"); }
         
         private void Bet1DollarButton_OnPointerEntered(object sender, PointerEventArgs e) { Bet1DollarButton.BackgroundColor = Color.FromArgb("#B077E8"); }
-        private void Bet1DollarButton_OnPointerExited(object sender, PointerEventArgs e) { Bet1DollarButton.BackgroundColor = Color.FromArgb("#8342B8"); }
+        private void Bet1DollarButton_OnPointerExited(object sender, PointerEventArgs e) 
+        {
+            if (chosen_chip_value != 1)
+            Bet1DollarButton.BackgroundColor = Color.FromArgb("#8342B8");
+        }
         private void Bet5DollarButton_OnPointerEntered(object sender, PointerEventArgs e) { Bet5DollarButton.BackgroundColor = Color.FromArgb("#FF7070"); }
-        private void Bet5DollarButton_OnPointerExited(object sender, PointerEventArgs e) { Bet5DollarButton.BackgroundColor = Color.FromArgb("#B0130B"); }
+        private void Bet5DollarButton_OnPointerExited(object sender, PointerEventArgs e) 
+        { 
+            if(chosen_chip_value !=5)
+            Bet5DollarButton.BackgroundColor = Color.FromArgb("#B0130B");
+        }
         private void Bet25DollarButton_OnPointerEntered(object sender, PointerEventArgs e) { Bet25DollarButton.BackgroundColor = Color.FromArgb("#098D00"); }
-        private void Bet25DollarButton_OnPointerExited(object sender, PointerEventArgs e) { Bet25DollarButton.BackgroundColor = Color.FromArgb("#22740B"); }
+        private void Bet25DollarButton_OnPointerExited(object sender, PointerEventArgs e) 
+        { 
+            if(chosen_chip_value != 25)
+            Bet25DollarButton.BackgroundColor = Color.FromArgb("#22740B"); 
+        }
         private void Bet50DollarButton_OnPointerEntered(object sender, PointerEventArgs e) { Bet50DollarButton.BackgroundColor = Color.FromArgb("#F5DC00"); }
-        private void Bet50DollarButton_OnPointerExited(object sender, PointerEventArgs e) { Bet50DollarButton.BackgroundColor = Color.FromArgb("#BFAC00"); }
+        private void Bet50DollarButton_OnPointerExited(object sender, PointerEventArgs e) 
+        {
+            if(chosen_chip_value != 50)
+            Bet50DollarButton.BackgroundColor = Color.FromArgb("#BFAC00");
+        }
         private void Bet100DollarButton_OnPointerEntered(object sender, PointerEventArgs e) { Bet100DollarButton.BackgroundColor = Color.FromArgb("#E89FEB"); }
-        private void Bet100DollarButton_OnPointerExited(object sender, PointerEventArgs e) { Bet100DollarButton.BackgroundColor = Color.FromArgb("#CC66D0"); }
+        private void Bet100DollarButton_OnPointerExited(object sender, PointerEventArgs e) 
+        { 
+            if(chosen_chip_value != 100)
+            Bet100DollarButton.BackgroundColor = Color.FromArgb("#CC66D0"); 
+        }
         private void Bet500DollarButton_OnPointerEntered(object sender, PointerEventArgs e) { Bet500DollarButton.BackgroundColor = Color.FromArgb("#FFB066"); }
-        private void Bet500DollarButton_OnPointerExited(object sender, PointerEventArgs e) { Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00"); }
+        private void Bet500DollarButton_OnPointerExited(object sender, PointerEventArgs e) 
+        { 
+            if(chosen_chip_value != 500)
+            Bet500DollarButton.BackgroundColor = Color.FromArgb("#E86C00"); 
+        }
         #endregion
     }
 }
