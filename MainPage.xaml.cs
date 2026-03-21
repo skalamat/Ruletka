@@ -10,6 +10,7 @@
         public double chosen_chip_value = 0;
 
         double[] current_bet_on = new double[37];
+
         double current_bet_on_red = 0;
         double current_bet_on_black = 0;
 
@@ -39,23 +40,54 @@
         {
             Navigation.PushAsync(new AccountPage());
         }
-
-        private async void OnSpinClicked(object? sender, EventArgs e)
-        {
-            await SpinToAngle(Random.Shared.NextSingle() * 360f);
-        }
-
-        private void CancelButton_Clicked(object sender, EventArgs e)
+        public void ClearBets()
         {
             foreach (var grid in _betGrids)
             {
                 var label = grid.Children.OfType<Label>().FirstOrDefault();
                 if (label != null) grid.Children.Remove(label);
             }
-
             Array.Clear(current_bet_on);
             current_bet_on_red = 0;
             current_bet_on_black = 0;
+        }
+
+        private async void OnSpinClicked(object? sender, EventArgs e)
+        {
+            if (!current_bet_on.Any(bet => bet > 0))
+            {
+                result_label.Text = "Nie postawiono żadnegoi zakładu";
+                return;
+            }
+
+            await SpinToAngle(Random.Shared.NextSingle() * 360f);
+
+            result_label.Text = "";
+            Random r = new Random();
+            int winning_number = r.Next(0,37);
+
+            result_label.Text = $"Wylosowano numer {winning_number}";
+            for (int i = 0; i <=36; i++)
+            {
+                if(current_bet_on[i] > 0)
+                {
+                    if(winning_number == i)
+                    {
+                        result_label.Text += $"\nWygrałeś {current_bet_on[i] * 35}$ na numerze {i}!";
+                    }
+                    else
+                    {
+                        result_lost_label.Text = $"\nPrzegrałeś zakład";
+                    }
+                }
+            }
+            await Task.Delay(1000);
+            ClearBets();
+        }
+
+        private void CancelButton_Clicked(object sender, EventArgs e)
+        {
+            ClearBets();
         }
 
         #region żetony
@@ -330,7 +362,7 @@
         #endregion
 
         #region koło ruletki
-        public async Task SpinToAngle(float targetAngle, int durationMs = 1000)
+        public async Task SpinToAngle(float targetAngle, int durationMs = 1500)
         {
             if (_isSpinning) return;
             _isSpinning = true;
@@ -371,6 +403,7 @@
         #region hoovers
         private void AccountHoverEntered(object? sender, PointerEventArgs e) { AccountBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0")); }
         private void AccountHoverExited(object? sender, PointerEventArgs e) { AccountBorder.Background = new SolidColorBrush(Colors.SlateGray); }
+
         private void SpinButton_OnPointerEntered(object sender, PointerEventArgs e) { SpinButton.BackgroundColor = Color.FromArgb("#B81304"); }
         private void SpinButton_OnPointerExited(object sender, PointerEventArgs e) { SpinButton.BackgroundColor = Colors.Maroon; }
         private void CancelButton_OnPointerEntered(object sender, PointerEventArgs e) { CancelButton.BackgroundColor = Colors.LightGray; }
@@ -450,6 +483,7 @@
         private void Bet35Button_OnPointerExited(object sender, PointerEventArgs e) { Bet35Button.BackgroundColor = Color.FromArgb("#B81304"); }
         private void Bet36Button_OnPointerEntered(object sender, PointerEventArgs e) { Bet36Button.BackgroundColor = Color.FromArgb("#4A4A4A"); }
         private void Bet36Button_OnPointerExited(object sender, PointerEventArgs e) { Bet36Button.BackgroundColor = Color.FromArgb("#242424"); }
+
         private void BetRedButton_OnPointerEntered(object sender, PointerEventArgs e) { BetRedButton.BackgroundColor = Color.FromArgb("#FF7070"); }
         private void BetRedButton_OnPointerExited(object sender, PointerEventArgs e) { BetRedButton.BackgroundColor = Color.FromArgb("#B81304"); }
         private void BetBlackButton_OnPointerEntered(object sender, PointerEventArgs e) { BetBlackButton.BackgroundColor = Color.FromArgb("#4A4A4A"); }
