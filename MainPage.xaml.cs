@@ -40,6 +40,8 @@
         {
             Navigation.PushAsync(new AccountPage());
         }
+
+        #region przyciski ruletki
         public void ClearBets()
         {
             foreach (var grid in _betGrids)
@@ -75,6 +77,8 @@
             if (current_bet > balance)
             {
                 DisplayAlert("Błąd", "Nie masz wystarczająco dużo środków, aby postawić ten zakład.", "OK");
+                await Task.Delay(1000);
+                ClearBets();
                 return;
             }
             await SpinToAngle(Random.Shared.NextSingle() * 360f);
@@ -135,6 +139,7 @@
         {
             ClearBets();
         }
+        #endregion
 
         #region żetony
         private void Bet1DollarButton_Clicked(object sender, EventArgs e) 
