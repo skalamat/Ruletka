@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Ruletka.MainPage" HeightRequest="900" WidthRequest="900">
+             x:Class="Ruletka.MainPage"  WidthRequest="950">
+    
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#1E2F40" Offset="0.0" />
             <GradientStop Color="Black" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
+    
     <ContentPage.Resources>
         <Style x:Key="BottomLineStyle" TargetType="BoxView">
             <Setter Property="HeightRequest" Value="1" />
@@ -22,27 +24,32 @@
         <StackLayout>
 
             <!--HEADER-->
-            <Grid Background="#0A0F1C" HeightRequest="50">
+            <Grid Background="#0A0F1C" HeightRequest="60" Padding="0,10,0,0">
 
-                <Border Background="SlateGray" WidthRequest="200" HeightRequest="40" HorizontalOptions="Start" 
-                        VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                <Border Background="#36404A" WidthRequest="200" HeightRequest="40" HorizontalOptions="Start" 
+                        VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
 
                     <HorizontalStackLayout>
                         <Image Source="ruletka.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0"/>
-                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="22" FontFamily="PlayfairDisplay">Ruletka</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="22" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Ruletka</Label>
                     </HorizontalStackLayout>
                 </Border>
 
-                <Border Background="SlateGray" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
-                        VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
+                <Border Background="#36404A" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
+                        VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
                     <HorizontalStackLayout>
-                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" x:Name="balance_label">Saldo:</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="60" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Saldo:</Label>
+                        <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="140" FontAttributes="Bold" FontSize="20"  x:Name="balance_label"></Label>
                     </HorizontalStackLayout>
                 </Border>
 
-                <Border Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
-                        VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8">
-                    <HorizontalStackLayout x:Name="account" >
+                <Border x:Name="AccountBorder" Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
+                    VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AccountTapped"/>
+                        <PointerGestureRecognizer PointerEntered="AccountHoverEntered" PointerExited="AccountHoverExited"/>
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout x:Name="account">
                         <Image Source="konto.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0" HorizontalOptions="Center"/>
                     </HorizontalStackLayout>
                 </Border>
@@ -52,37 +59,491 @@
             <Grid>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="500"></ColumnDefinition>
+                    <ColumnDefinition Width="650"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <!--KOŁO RULETKI-->
+                <!--LEWA STRONA-->
                 <StackLayout Grid.Column="0" Padding="20">
-                    <VerticalStackLayout Background="SlateGray" WidthRequest="460" Padding="10">
+                    <!--KOŁO RULETKI-->
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,0,0,15">
 
-                        <Label VerticalOptions="Center" Margin="10,10,10,4" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay">Koło Ruletki</Label>
+                        <VerticalStackLayout>
 
-                        <!-- GraphicsView – tutaj rysowane jest koło -->
-                        <GraphicsView x:Name="WheelView"
-                                      HeightRequest="340"
-                                      WidthRequest="340"
-                                      HorizontalOptions="Center"
-                                      Margin="0,8,0,8"/>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" HorizontalOptions="Center" TextColor="#F9F6EE">Koło Ruletki</Label>
 
-                        <!-- Przyciski -->
-                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
-                            <Button x:Name="SpinButton"
-                                    Text="🎰 Zakręć kołem"
-                                    Background="Maroon"
-                                    FontAttributes="Bold"
-                                    Clicked="OnSpinClicked"/>
-                            <Button Text="Usuń zakłady"
-                                    Background="DarkGray"/>
-                        </HorizontalStackLayout>
+                            <GraphicsView x:Name="WheelView" HeightRequest="340" WidthRequest="340" HorizontalOptions="Center" Margin="0,8,0,8"/>
 
-                    </VerticalStackLayout>
+                            <Label x:Name="result_label" FontFamily="PlayfairDisplay" HorizontalOptions="Center" FontSize="17" FontAttributes="Bold" Margin="0,0,0,10"></Label>
+
+                            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
+                                <Button x:Name="SpinButton" Text="▶️ Zakręć kołem" BackgroundColor="Maroon" FontAttributes="Bold" Clicked="OnSpinClicked" TextColor="#F5F5F5">
+                                    <Button.GestureRecognizers>
+                                        <PointerGestureRecognizer PointerEntered="SpinButton_OnPointerEntered" PointerExited="SpinButton_OnPointerExited"/>
+                                    </Button.GestureRecognizers>
+                                </Button>
+
+                                <Button Text="⟳ Usuń zakłady" BackgroundColor="DarkGray" x:Name="CancelButton" Clicked="CancelButton_Clicked">
+                                    <Button.GestureRecognizers>
+                                        <PointerGestureRecognizer PointerEntered="CancelButton_OnPointerEntered" PointerExited="CancelButton_OnPointerExited"/>
+                                    </Button.GestureRecognizers> 
+                                </Button>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+
+                    </Border>
+                    <!--ZAKŁADY-->
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10">
+                        <VerticalStackLayout>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Zakłady</Label>
+                            <Grid RowSpacing="2" ColumnSpacing="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition ></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition ></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                
+                                <!--ZIELONE-->
+                                <Grid x:Name="Bet0Grid" VerticalOptions="Center" Grid.Column="0" Grid.Row="1">
+                                    <Button Grid.Column="0" Grid.Row="1" Text="0" BackgroundColor="Green" Padding="0" TextColor="White" x:Name="Bet0Button" Clicked="Bet0Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet0Button_OnPointerEntered" PointerExited="Bet0Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--1 KOLUMNA-->
+                                <Grid x:Name="Bet3Grid" Grid.Column="1" Grid.Row="0">
+                                    <Button Text="3" BackgroundColor="#B81304" TextColor="White" x:Name="Bet3Button" Clicked="Bet3Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet3Button_OnPointerEntered" PointerExited="Bet3Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet2Grid" Grid.Column="1" Grid.Row="1">
+                                    <Button Text="2" BackgroundColor="#242424" TextColor="White" x:Name="Bet2Button" Clicked="Bet2Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet2Button_OnPointerEntered" PointerExited="Bet2Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet1Grid" Grid.Column="1" Grid.Row="2">
+                                    <Button Text="1" BackgroundColor="#B81304" TextColor="White" x:Name="Bet1Button" Clicked="Bet1Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet1Button_OnPointerEntered" PointerExited="Bet1Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--2 KOLUMNA-->
+                                <Grid x:Name="Bet6Grid" Grid.Column="2" Grid.Row="0">
+                                    <Button Text="6" BackgroundColor="#242424" TextColor="White" x:Name="Bet6Button" Clicked="Bet6Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet6Button_OnPointerEntered" PointerExited="Bet6Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet5Grid" Grid.Column="2" Grid.Row="1">
+                                    <Button Text="5" BackgroundColor="#B81304" TextColor="White" x:Name="Bet5Button" Clicked="Bet5Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet5Button_OnPointerEntered" PointerExited="Bet5Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet4Grid" Grid.Column="2" Grid.Row="2">
+                                    <Button Text="4" BackgroundColor="#242424" TextColor="White" x:Name="Bet4Button" Clicked="Bet4Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet4Button_OnPointerEntered" PointerExited="Bet4Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--3 KOLUMNA-->
+                                <Grid x:Name="Bet9Grid" Grid.Column="3" Grid.Row="0">
+                                    <Button Text="9" BackgroundColor="#B81304" TextColor="White" x:Name="Bet9Button" Clicked="Bet9Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet9Button_OnPointerEntered" PointerExited="Bet9Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet8Grid" Grid.Column="3" Grid.Row="1">
+                                    <Button Text="8" BackgroundColor="#242424" TextColor="White" x:Name="Bet8Button" Clicked="Bet8Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet8Button_OnPointerEntered" PointerExited="Bet8Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet7Grid" Grid.Column="3" Grid.Row="2">
+                                    <Button Text="7" BackgroundColor="#B81304" TextColor="White" x:Name="Bet7Button" Clicked="Bet7Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet7Button_OnPointerEntered" PointerExited="Bet7Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--4 KOLUMNA-->
+                                <Grid x:Name="Bet12Grid" Grid.Column="4" Grid.Row="0">
+                                    <Button Text="12" BackgroundColor="#242424" TextColor="White" x:Name="Bet12Button" Clicked="Bet12Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet12Button_OnPointerEntered" PointerExited="Bet12Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet11Grid" Grid.Column="4" Grid.Row="1">
+                                    <Button Text="11" BackgroundColor="#B81304" TextColor="White" x:Name="Bet11Button" Clicked="Bet11Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet11Button_OnPointerEntered" PointerExited="Bet11Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet10Grid" Grid.Column="4" Grid.Row="2">
+                                    <Button Text="10" BackgroundColor="#242424" TextColor="White" x:Name="Bet10Button" Clicked="Bet10Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet10Button_OnPointerEntered" PointerExited="Bet10Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--5 KOLUMNA-->
+                                <Grid x:Name="Bet15Grid" Grid.Column="5" Grid.Row="0">
+                                    <Button Text="15" BackgroundColor="#B81304" TextColor="White" x:Name="Bet15Button" Clicked="Bet15Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet15Button_OnPointerEntered" PointerExited="Bet15Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet14Grid" Grid.Column="5" Grid.Row="1">
+                                    <Button Text="14" BackgroundColor="#242424" TextColor="White" x:Name="Bet14Button" Clicked="Bet14Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet14Button_OnPointerEntered" PointerExited="Bet14Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet13Grid" Grid.Column="5" Grid.Row="2">
+                                    <Button Text="13" BackgroundColor="#B81304" TextColor="White" x:Name="Bet13Button" Clicked="Bet13Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet13Button_OnPointerEntered" PointerExited="Bet13Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--6 KOLUMNA-->
+                                <Grid x:Name="Bet18Grid" Grid.Column="6" Grid.Row="0">
+                                    <Button Text="18" BackgroundColor="#242424" TextColor="White" x:Name="Bet18Button" Clicked="Bet18Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet18Button_OnPointerEntered" PointerExited="Bet18Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet17Grid" Grid.Column="6" Grid.Row="1">
+                                    <Button Text="17" BackgroundColor="#B81304" TextColor="White" x:Name="Bet17Button" Clicked="Bet17Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet17Button_OnPointerEntered" PointerExited="Bet17Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet16Grid" Grid.Column="6" Grid.Row="2">
+                                    <Button Text="16" BackgroundColor="#242424" TextColor="White" x:Name="Bet16Button" Clicked="Bet16Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet16Button_OnPointerEntered" PointerExited="Bet16Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--7 KOLUMNA-->
+                                <Grid x:Name="Bet21Grid" Grid.Column="7" Grid.Row="0">
+                                    <Button Text="21" BackgroundColor="#B81304" TextColor="White" x:Name="Bet21Button" Clicked="Bet21Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet21Button_OnPointerEntered" PointerExited="Bet21Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet20Grid" Grid.Column="7" Grid.Row="1">
+                                    <Button Text="20" BackgroundColor="#242424" TextColor="White" x:Name="Bet20Button" Clicked="Bet20Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet20Button_OnPointerEntered" PointerExited="Bet20Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet19Grid" Grid.Column="7" Grid.Row="2">
+                                    <Button Text="19" BackgroundColor="#B81304" TextColor="White" x:Name="Bet19Button" Clicked="Bet19Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet19Button_OnPointerEntered" PointerExited="Bet19Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--8 KOLUMNA-->
+                                <Grid x:Name="Bet24Grid" Grid.Column="8" Grid.Row="0">
+                                    <Button Text="24" BackgroundColor="#242424" TextColor="White" x:Name="Bet24Button" Clicked="Bet24Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet24Button_OnPointerEntered" PointerExited="Bet24Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet23Grid" Grid.Column="8" Grid.Row="1">
+                                    <Button Text="23" BackgroundColor="#B81304" TextColor="White" x:Name="Bet23Button" Clicked="Bet23Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet23Button_OnPointerEntered" PointerExited="Bet23Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet22Grid" Grid.Column="8" Grid.Row="2">
+                                    <Button Text="22" BackgroundColor="#242424" TextColor="White" x:Name="Bet22Button" Clicked="Bet22Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet22Button_OnPointerEntered" PointerExited="Bet22Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--9 KOLUMNA-->
+                                <Grid x:Name="Bet27Grid" Grid.Column="9" Grid.Row="0">
+                                    <Button Text="27" BackgroundColor="#B81304" TextColor="White" x:Name="Bet27Button" Clicked="Bet27Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet27Button_OnPointerEntered" PointerExited="Bet27Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet26Grid" Grid.Column="9" Grid.Row="1">
+                                    <Button Text="26" BackgroundColor="#242424" TextColor="White" x:Name="Bet26Button" Clicked="Bet26Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet26Button_OnPointerEntered" PointerExited="Bet26Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet25Grid" Grid.Column="9" Grid.Row="2">
+                                    <Button Text="25" BackgroundColor="#B81304" TextColor="White" x:Name="Bet25Button" Clicked="Bet25Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet25Button_OnPointerEntered" PointerExited="Bet25Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--10 KOLUMNA-->
+                                <Grid x:Name="Bet30Grid" Grid.Column="10" Grid.Row="0">
+                                    <Button Text="30" BackgroundColor="#242424" TextColor="White" x:Name="Bet30Button" Clicked="Bet30Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet30Button_OnPointerEntered" PointerExited="Bet30Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet29Grid" Grid.Column="10" Grid.Row="1">
+                                    <Button Text="29" BackgroundColor="#B81304" TextColor="White" x:Name="Bet29Button" Clicked="Bet29Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet29Button_OnPointerEntered" PointerExited="Bet29Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet28Grid" Grid.Column="10" Grid.Row="2">
+                                    <Button Text="28" BackgroundColor="#242424" TextColor="White" x:Name="Bet28Button" Clicked="Bet28Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet28Button_OnPointerEntered" PointerExited="Bet28Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--11 KOLUMNA-->
+                                <Grid x:Name="Bet33Grid" Grid.Column="11" Grid.Row="0">
+                                    <Button Text="33" BackgroundColor="#B81304" TextColor="White" x:Name="Bet33Button" Clicked="Bet33Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet33Button_OnPointerEntered" PointerExited="Bet33Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet32Grid" Grid.Column="11" Grid.Row="1">
+                                    <Button Text="32" BackgroundColor="#242424" TextColor="White" x:Name="Bet32Button" Clicked="Bet32Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet32Button_OnPointerEntered" PointerExited="Bet32Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet31Grid" Grid.Column="11" Grid.Row="2">
+                                    <Button Text="31" BackgroundColor="#B81304" TextColor="White" x:Name="Bet31Button" Clicked="Bet31Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet31Button_OnPointerEntered" PointerExited="Bet31Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+
+                                <!--12 KOLUMNA-->
+                                <Grid x:Name="Bet36Grid" Grid.Column="12" Grid.Row="0">
+                                    <Button Text="36" BackgroundColor="#242424" TextColor="White" x:Name="Bet36Button" Clicked="Bet36Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet36Button_OnPointerEntered" PointerExited="Bet36Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet35Grid" Grid.Column="12" Grid.Row="1">
+                                    <Button Text="35" BackgroundColor="#B81304" TextColor="White" x:Name="Bet35Button" Clicked="Bet35Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet35Button_OnPointerEntered" PointerExited="Bet35Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="Bet34Grid" Grid.Column="12" Grid.Row="2">
+                                    <Button Text="34" BackgroundColor="#242424" TextColor="White" x:Name="Bet34Button" Clicked="Bet34Button_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet34Button_OnPointerEntered" PointerExited="Bet34Button_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                            
+                            <!--RESZTA ZAKŁADÓW (kolory)-->
+                            <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+                                <Grid x:Name="BetRedGrid">
+                                    <Button Text="Czerwony" WidthRequest="150" Margin="5" TextColor="White" BackgroundColor="#B81304" x:Name="BetRedButton" Clicked="BetRedButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="BetRedButton_OnPointerEntered" PointerExited="BetRedButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                                <Grid x:Name="BetBlackGrid">
+                                    <Button Text="Czarny" WidthRequest="150" Margin="5" TextColor="White" BackgroundColor="#242424" x:Name="BetBlackButton" Clicked="BetBlackButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="BetBlackButton_OnPointerEntered" PointerExited="BetBlackButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Grid>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
+
                 </StackLayout>
-                <StackLayout Grid.Column="1"></StackLayout>
+                <!--PRAWA STRONA-->
+                <StackLayout Grid.Column="1" Padding="20">
+                    <!--ŻETONY-->
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10">
+                        <VerticalStackLayout>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Żetony</Label>
+
+                            <HorizontalStackLayout>
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="1$" WidthRequest="70" BackgroundColor="#8342B8" TextColor="White" x:Name="Bet1DollarButton" Clicked="Bet1DollarButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet1DollarButton_OnPointerEntered" PointerExited="Bet1DollarButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Border>
+
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="5$" WidthRequest="70" BackgroundColor="#B0130B" TextColor="White" x:Name="Bet5DollarButton" Clicked="Bet5DollarButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet5DollarButton_OnPointerEntered" PointerExited="Bet5DollarButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Border>
+
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="25$" WidthRequest="70" BackgroundColor="#22740B" TextColor="White" x:Name="Bet25DollarButton" Clicked="Bet25DollarButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet25DollarButton_OnPointerEntered" PointerExited="Bet25DollarButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Border>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="50$" WidthRequest="70" BackgroundColor="#BFAC00" TextColor="White" x:Name="Bet50DollarButton" Clicked="Bet50DollarButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet50DollarButton_OnPointerEntered" PointerExited="Bet50DollarButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Border>
+
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="100$" WidthRequest="70" BackgroundColor="#CC66D0" TextColor="White" x:Name="Bet100DollarButton" Clicked="Bet100DollarButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet100DollarButton_OnPointerEntered" PointerExited="Bet100DollarButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Border>
+
+                                <Border StrokeShape="RoundRectangle 50" Stroke="Black" StrokeThickness="0.6" HeightRequest="45" VerticalOptions="Center" Margin="3">
+                                    <Button Text="500$" WidthRequest="70" BackgroundColor="#E86C00" TextColor="White" x:Name="Bet500DollarButton" Clicked="Bet500DollarButton_Clicked">
+                                        <Button.GestureRecognizers>
+                                            <PointerGestureRecognizer PointerEntered="Bet500DollarButton_OnPointerEntered" PointerExited="Bet500DollarButton_OnPointerExited"/>
+                                        </Button.GestureRecognizers>
+                                    </Button>
+                                </Border>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                    <!--ZAKŁAD-INFO-->
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                        <VerticalStackLayout>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Obecny zakład</Label>
+
+                            <Border Background="LightGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Margin="0,5,0,0">
+                                <HorizontalStackLayout HeightRequest="30">
+                                    <Label x:Name="current_color_label"></Label>
+                                    <Label x:Name="current_color_bet_label"></Label>
+                                </HorizontalStackLayout>
+                            </Border>
+
+                            <Border Background="LightGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Margin="0,10,0,0">
+                                <HorizontalStackLayout HeightRequest="30">
+                                    <Label x:Name="current_number_label"></Label>
+                                    <Label x:Name="current_number_bet_label"></Label>
+                                </HorizontalStackLayout>
+                            </Border>
+                            <BoxView Style="{StaticResource BottomLineStyle}" Margin="0,10,0,0" Color="Black" HeightRequest="2"></BoxView>
+
+                            <HorizontalStackLayout>
+                                <Label FontSize="16" FontFamily="PlayfairDisplay" HorizontalOptions="Start" Margin="4" TextColor="#F9F6EE">Łączny zakład:</Label>
+                                <Label x:Name="total_current_bet"></Label>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!--STATYSTYKI GRY-->
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                        <VerticalStackLayout>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Statystyki gry</Label>
+
+                            <HorizontalStackLayout>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Zagrane gry:</Label>
+                                <Label x:Name="games_playes_label"></Label>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Łączcna wygrana: </Label>
+                                <Label x:Name="total_cash_won_label"></Label>
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Wygrane gry:</Label>
+                                <Label x:Name="games_won_label"></Label>
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                    
+                    <!--HISTORIA-->
+                    <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
+                        <VerticalStackLayout>
+                            <Label  Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Ostatnie zakłady</Label>
+                            
+                        </VerticalStackLayout>
+                    </Border>   
+                </StackLayout>
             </Grid>
 
         </StackLayout>
