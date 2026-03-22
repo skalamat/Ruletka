@@ -28,6 +28,7 @@
 
                 <Entry></Entry>
                 <Entry></Entry>
+                
             </VerticalStackLayout>
         </Grid>
         <BoxView Style="{StaticResource BottomLineStyle}"></BoxView>
