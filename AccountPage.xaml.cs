@@ -22,4 +22,14 @@ public partial class AccountPage : ContentPage
     {
         ReturnButton.Background = new SolidColorBrush(Colors.SlateGray);
     }
-}              
+
+    private void registerbutton_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void logInButton_Clicked(object sender, EventArgs e)
+    {
+
+    }
+}

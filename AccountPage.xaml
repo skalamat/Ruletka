@@ -25,9 +25,13 @@
                     </Border.GestureRecognizers>
                     <Button Text="Wróc" x:Name="ReturnButton" Clicked="return_Clicked" Background="SlateGray" TextColor="#F9F6EE"></Button>
                 </Border>
+                
+                <Button Text="Zarejestruj się" x:Name="registerbutton" Clicked="registerbutton_Clicked"></Button>
+                <Button Text="Zaloguj się" x:Name="logInButton" Clicked="logInButton_Clicked"></Button>
 
-                <Entry></Entry>
-                <Entry></Entry>
+                <Entry x:Name="usernameEntry" Placeholder="Podaj swoją nazwę użytkownika"></Entry>
+                <Entry x:Name="emailEntry" Placeholder="Podaj swój email"></Entry>
+                <Entry x:Name="passwordEntry" Placeholder="Podaj swoje hasło"></Entry>
                 
             </VerticalStackLayout>
         </Grid>
