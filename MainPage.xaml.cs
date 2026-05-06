@@ -36,9 +36,13 @@
             };
         }
 
-        private void AccountTapped(object sender, TappedEventArgs e)
+        private void LoginTapped(object sender, TappedEventArgs e)
         {
-            Navigation.PushAsync(new AccountPage());
+            Navigation.PushAsync(new LogInPage());
+        }
+        private void RegisterTapped(object sender, TappedEventArgs e)
+        {
+            Navigation.PushAsync(new RegisterPage());
         }
 
         #region przyciski ruletki
@@ -521,8 +525,11 @@
         #endregion
 
         #region hoovers
-        private void AccountHoverEntered(object? sender, PointerEventArgs e) { AccountBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0")); }
-        private void AccountHoverExited(object? sender, PointerEventArgs e) { AccountBorder.Background = new SolidColorBrush(Colors.SlateGray); }
+        private void LoginHoverEntered(object? sender, PointerEventArgs e) { LoginBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0")); }
+        private void LoginHoverExited(object? sender, PointerEventArgs e) { LoginBorder.Background = new SolidColorBrush(Colors.SlateGray); }
+
+        private void RegisterHoverEntered(object? sender, PointerEventArgs e) { RegisterBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0")); }
+        private void RegisterHoverExited(object? sender, PointerEventArgs e) { RegisterBorder.Background = new SolidColorBrush(Colors.SlateGray); }
 
         private void SpinButton_OnPointerEntered(object sender, PointerEventArgs e) { SpinButton.BackgroundColor = Color.FromArgb("#B81304"); }
         private void SpinButton_OnPointerExited(object sender, PointerEventArgs e) { SpinButton.BackgroundColor = Colors.Maroon; }
