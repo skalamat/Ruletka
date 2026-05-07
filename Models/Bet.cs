@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruletka
 {
     class Bet
     {
-        public int id;
-        public int userId;
-        public int roundId;
-        public string betType;
-        public decimal value;
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
 
-        public Bet(int _id, int _userId, int _roundId, string _betType, decimal _value)
-        {
-            id = _id;
-            userId = _userId;
-            roundId = _roundId;
-            betType = _betType;
-            value = _value;
-        }
+        [Column("user_id")]
+        public int UserId { get; set; }
+
+        [Column("round_id")]
+        public int RoundId { get; set; }
+
+        [Column("bet_type")]
+        public string BetType { get; set; }
+
+        [Column("value")]
+        public decimal Value { get; set; }
     }
 }

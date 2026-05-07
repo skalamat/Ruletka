@@ -1,30 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruletka
 {
     class User
     {
-        public int id;
-        public string userName;
-        public string email;
-        public string password;
-        public decimal balance;
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
 
-        public List<Bet> bets;
-        public List<Transaction> transactions;
+        [Column("user_name")]
+        public string UserName { get; set; }
 
-        public User(int _id, string _userName, string _email, string _password)
-        {
-            id = _id;
-            userName = _userName;
-            email = _email;
-            password = _password;
-            balance = 0;
-            bets = new List<Bet>();
-            transactions = new List<Transaction>();
-        }
+        [Column("email")]
+        public string Email { get; set; }
 
+        [Column("password")]
+        public string Password { get; set; }
+
+        [Column("balance")]
+        public decimal Balance { get; set; }
+
+        public List<Bet> Bets { get; set; } = new List<Bet>();
+        public List<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
 }

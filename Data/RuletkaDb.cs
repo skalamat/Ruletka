@@ -17,7 +17,7 @@ namespace Ruletka.Data
                 optionsBuilder.UseSqlite("Data source=ruletka.db");
             }
 
-        public void DodajUzytkownika(User user)
+        public void AddUser(User user)
         {
             Users.Add(user);
             SaveChanges();

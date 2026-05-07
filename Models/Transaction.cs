@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruletka
 {
     class Transaction
     {
-        public int id;
-        public int userId;
-        public decimal value;
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
 
-        public Transaction(int _id, int _userId, decimal _value)
-        {
-            id = _id;
-            userId = _userId;
-            value = _value;
-        }
+        [Column("user_id")]
+        public int UserId { get; set; }
+
+        [Column("value")]
+        public decimal Value { get; set; }
     }
 }

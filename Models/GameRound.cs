@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruletka
 {
     class GameRound
     {
-        public int id;
-        public int winningNumber;
-        public string winningColor;
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
 
-        public List<Bet> bets;
+        [Column("winning_number")]
+        public int WinningNumber { get; set; }
 
-        public GameRound(int _id, int _winningNumber, string _winningColor)
-        {
-            id = _id;
-            winningNumber = _winningNumber;
-            winningColor = _winningColor;
-            bets = new List<Bet>();
-        }
+        [Column("winning_color")]
+        public string WinningColor { get; set; }
+
+        public List<Bet> Bets { get; set; } = new List<Bet>();
     }
 }

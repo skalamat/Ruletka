@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Ruletka.Data;
 
 namespace Ruletka
 {
@@ -7,6 +8,11 @@ namespace Ruletka
         public App()
         {
             InitializeComponent();
+
+            using (var db = new RuletkaDb())
+            {
+                db.Database.EnsureCreated();
+            }
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
