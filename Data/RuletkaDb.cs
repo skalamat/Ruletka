@@ -22,5 +22,27 @@ namespace Ruletka.Data
             Users.Add(user);
             SaveChanges();
         }
+        public User LoginUser(string username, string password)
+        {
+            foreach (var user in Users)
+            {
+                if(user.UserName == username && user.Password == password)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+        public void UpdateBalance(int userId, double newBalance)
+        {
+            foreach (var user in Users)
+            {
+                if (user.Id == userId)
+                {
+                    user.Balance = newBalance;
+                    SaveChanges();
+                }
+            }
+        }
     }
 }

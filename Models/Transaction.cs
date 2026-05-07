@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruletka
 {
-    class Transaction
+    public class Transaction
     {
         [Key]
         [Column("id")]
@@ -13,6 +13,6 @@ namespace Ruletka
         public int UserId { get; set; }
 
         [Column("value")]
-        public decimal Value { get; set; }
+        public double Value { get; set; }
     }
 }

@@ -12,18 +12,6 @@ public partial class RegisterPage : ContentPage
     {
         Navigation.PopAsync();
     }
-
-    //HOOVER
-    private void ReturnHoverEntered(object? sender, PointerEventArgs e)
-    {
-        ReturnButton.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0"));
-
-    }
-    private void ReturnHoverExited(object? sender, PointerEventArgs e)
-    {
-        ReturnButton.Background = new SolidColorBrush(Colors.SlateGray);
-    }
-
     private void registerbutton_Clicked(object sender, EventArgs e)
     {
         string username = usernameEntry.Text;
@@ -35,7 +23,7 @@ public partial class RegisterPage : ContentPage
             UserName = username,
             Email = email,
             Password = password,
-            Balance = 500m,
+            Balance = 500,
         };
         var db = new RuletkaDb();
         db.AddUser(user);
@@ -43,5 +31,16 @@ public partial class RegisterPage : ContentPage
         usernameEntry.Text = string.Empty;
         emailEntry.Text = string.Empty;
         passwordEntry.Text = string.Empty;
+    }
+
+    //HOOVER
+    private void ReturnHoverEntered(object? sender, PointerEventArgs e)
+    {
+        ReturnButton.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0"));
+
+    }
+    private void ReturnHoverExited(object? sender, PointerEventArgs e)
+    {
+        ReturnButton.Background = new SolidColorBrush(Colors.SlateGray);
     }
 }

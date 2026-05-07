@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruletka
 {
-    class Bet
+    public class Bet
     {
         [Key]
         [Column("id")]
@@ -21,6 +21,6 @@ namespace Ruletka
         public string BetType { get; set; }
 
         [Column("value")]
-        public decimal Value { get; set; }
+        public double Value { get; set; }
     }
 }

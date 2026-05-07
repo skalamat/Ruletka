@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ruletka
 {
-    class GameRound
+    public class GameRound
     {
         [Key]
         [Column("id")]

@@ -1,12 +1,13 @@
-﻿    namespace Ruletka
-{
+﻿using Ruletka.Data;
+namespace Ruletka
+    {
     public partial class MainPage : ContentPage
     {
         private readonly RouletteWheelDrawable _drawable = new();
         private float _currentAngle = 0f;
         private bool _isSpinning = false;
 
-        public double balance = 500;
+        public double balance;
         public double chosen_chip_value = 0;
 
         double[] current_bet_on = new double[37];
@@ -18,6 +19,15 @@
 
         private List<Grid> _betGrids;
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (App.CurrentUser != null)
+            {
+                balance = App.CurrentUser.Balance;
+                balance_label.Text = Math.Round(balance, 2).ToString() + "$";
+            }
+        }
         public MainPage()
         {
             InitializeComponent();
@@ -137,6 +147,10 @@
             balance_label.Text = Math.Round(balance, 2).ToString() + "$";
             await Task.Delay(1000);
             ClearBets();
+            using (var db = new RuletkaDb())
+            {
+                db.UpdateBalance(App.CurrentUser.Id, balance);
+            }
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)
