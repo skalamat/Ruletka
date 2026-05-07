@@ -13,8 +13,14 @@ public partial class LogInPage : ContentPage
     }
     private void logInButton_Clicked(object sender, EventArgs e)
     {
-        string username = usernameEntry.Text;
-        string password = passwordEntry.Text;
+        string username = usernameEntry.Text?.Trim() ?? string.Empty;
+        string password = passwordEntry.Text?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            error.Text = "Wszystkie pola muszą być wypełnione";
+            return;
+        }
 
         using (var db = new RuletkaDb())
         {

@@ -12,10 +12,11 @@ namespace Ruletka.Data
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<User> Users { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            {
-                optionsBuilder.UseSqlite("Data source=ruletka.db");
-            }
+         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         {
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "ruletka.db");
+            optionsBuilder.UseSqlite($"Data Source={dbPath}");
+        }
 
         public void AddUser(User user)
         {

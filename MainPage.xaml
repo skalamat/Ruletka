@@ -50,7 +50,7 @@
                         <PointerGestureRecognizer PointerEntered="LoginHoverEntered" PointerExited="LoginHoverExited"/>
                     </Border.GestureRecognizers>
                     <HorizontalStackLayout x:Name="login" HorizontalOptions="Center">
-                        <Label Text="Zaloguj się" VerticalOptions="Center" FontAttributes="Bold" FontSize="16" FontFamily="PlayfairDisplay" TextColor="#F9F6EE" HorizontalTextAlignment="Center"/>
+                        <Label Text="Zaloguj się" x:Name="loginLabel" VerticalOptions="Center" FontAttributes="Bold" FontSize="16" FontFamily="PlayfairDisplay" TextColor="#F9F6EE" HorizontalTextAlignment="Center"/>
                     </HorizontalStackLayout>
                 </Border>
 

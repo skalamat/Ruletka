@@ -31,7 +31,8 @@
                 <Entry x:Name="passwordEntry" Placeholder="Podaj swoje hasło"></Entry>
 
                 <Button Text="Zarejestruj się" x:Name="registerbutton" Clicked="registerbutton_Clicked"></Button>
-                <Label x:Name="baza"></Label>
+                
+                <Label x:Name="error"></Label>
             </VerticalStackLayout>
         </Grid>
         <BoxView Style="{StaticResource BottomLineStyle}"></BoxView>

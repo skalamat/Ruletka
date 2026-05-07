@@ -21,11 +21,15 @@ namespace Ruletka
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
             if (App.CurrentUser != null)
             {
                 balance = App.CurrentUser.Balance;
                 balance_label.Text = Math.Round(balance, 2).ToString() + "$";
+                loginLabel.Text = "Wyloguj się";
+            }
+            else
+            {
+                loginLabel.Text = "Zaloguj się";
             }
         }
         public MainPage()
@@ -48,7 +52,15 @@ namespace Ruletka
 
         private void LoginTapped(object sender, TappedEventArgs e)
         {
-            Navigation.PushAsync(new LogInPage());
+            if(loginLabel.Text == "Zaloguj się")
+            {
+                Navigation.PushAsync(new LogInPage());
+            }
+            else if(loginLabel.Text == "Wyloguj się")
+            {
+                App.CurrentUser = null;
+                Navigation.PushAsync(new MainPage());
+            }
         }
         private void RegisterTapped(object sender, TappedEventArgs e)
         {
@@ -82,7 +94,11 @@ namespace Ruletka
                 current_bet += current_bet_on[i];
             }
             current_bet += current_bet_on_black + current_bet_on_red;
-
+            if(App.CurrentUser == null)
+            {
+                DisplayAlert("Błąd", "Musisz być zalogowany, aby grać.", "OK");
+                return;
+            }
             if (!current_bet_on.Any(bet => bet > 0) && current_bet_on_black == 0 && current_bet_on_red == 0)
             {
                 result_label.Text = "Nie postawiono żadnego zakładu";
