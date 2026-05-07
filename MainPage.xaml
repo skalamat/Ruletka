@@ -36,43 +36,32 @@
                 </Border>
 
                 <Border Background="#36404A" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
-                        VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
+                        VerticalOptions="Center" Margin="150,5,5,5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
                     <HorizontalStackLayout>
                         <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="60" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Saldo:</Label>
                         <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="140" FontAttributes="Bold" FontSize="20"  x:Name="balance_label"></Label>
                     </HorizontalStackLayout>
                 </Border>
 
-                <!--<Border x:Name="AccountBorder" Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
-                    VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8">
-                    <Border.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="AccountTapped"/>
-                        <PointerGestureRecognizer PointerEntered="AccountHoverEntered" PointerExited="AccountHoverExited"/>
-                    </Border.GestureRecognizers>
-                    <HorizontalStackLayout x:Name="account">
-                        <Image Source="konto.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0" HorizontalOptions="Center"/>
-                    </HorizontalStackLayout>
-                </Border>-->
-
-                <Border x:Name="LoginBorder" Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
-    VerticalOptions="Center" Margin="0,0,55,0" StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8">
+                <Border x:Name="LoginBorder" Background="SlateGray" WidthRequest="130" HeightRequest="40" HorizontalOptions="End" 
+    VerticalOptions="Center" Margin="0,0,140,0" StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="LoginTapped"/>
                         <PointerGestureRecognizer PointerEntered="LoginHoverEntered" PointerExited="LoginHoverExited"/>
                     </Border.GestureRecognizers>
-                    <HorizontalStackLayout x:Name="login">
-                        <Image Source="login.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0" HorizontalOptions="Center"/>
+                    <HorizontalStackLayout x:Name="login" HorizontalOptions="Center">
+                        <Label Text="Zaloguj się" VerticalOptions="Center" FontAttributes="Bold" FontSize="16" FontFamily="PlayfairDisplay" TextColor="#F9F6EE" HorizontalTextAlignment="Center"/>
                     </HorizontalStackLayout>
                 </Border>
 
-                <Border x:Name="RegisterBorder" Background="SlateGray" WidthRequest="50" HeightRequest="40" HorizontalOptions="End" 
+                <Border x:Name="RegisterBorder" Background="SlateGray" WidthRequest="130" HeightRequest="40" HorizontalOptions="End" 
     VerticalOptions="Center" Margin="5" StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8">
                     <Border.GestureRecognizers>
                         <TapGestureRecognizer Tapped="RegisterTapped"/>
                         <PointerGestureRecognizer PointerEntered="RegisterHoverEntered" PointerExited="RegisterHoverExited"/>
                     </Border.GestureRecognizers>
-                    <HorizontalStackLayout x:Name="register">
-                        <Image Source="rejestracja.png" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" Margin="5,0,0,0" HorizontalOptions="Center"/>
+                    <HorizontalStackLayout x:Name="register" HorizontalOptions="Center">
+                        <Label Text="Zarejestruj się" VerticalOptions="Center" FontAttributes="Bold" FontSize="16" FontFamily="PlayfairDisplay" TextColor="#F9F6EE"/>
                     </HorizontalStackLayout>
                 </Border>
             </Grid>
