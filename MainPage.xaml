@@ -34,7 +34,6 @@
                         <Label VerticalOptions="Center" Margin="20,0,0,0" WidthRequest="100" FontAttributes="Bold" FontSize="22" FontFamily="PlayfairDisplay" TextColor="#F9F6EE">Ruletka</Label>
                     </HorizontalStackLayout>
                 </Border>
-
                 <Border Background="#36404A" WidthRequest="200" HeightRequest="40" HorizontalOptions="Center" 
                         VerticalOptions="Center" Margin="500,5,5,5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
                     <HorizontalStackLayout>
