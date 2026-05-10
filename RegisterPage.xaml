@@ -45,7 +45,7 @@
             <VerticalStackLayout Margin="25">
                 
                 <Label Text="Nazwa użytkownika" Margin="3" FontSize="15"></Label>
-                <Entry x:Name="usernameEntry" Placeholder="Twoja nazwa" BackgroundColor="#1E2F40">
+                <Entry x:Name="usernameEntry" Placeholder="Twoja nazwa" BackgroundColor="#1E2F40" WidthRequest="350">
                     <Entry.GestureRecognizers>
                         <PointerGestureRecognizer PointerEntered="userNameMouseEnter" PointerExited="userNameMouseExit"></PointerGestureRecognizer>
                     </Entry.GestureRecognizers>
@@ -53,11 +53,22 @@
                 <Label x:Name="usernameErrorLabel" Margin="3" FontSize="13" TextColor="#ff4747"></Label>
 
                 <Label Text="Hasło" Margin="3" FontSize="15"></Label>
-                <Entry x:Name="passwordEntry" Placeholder="Twoje hasło" BackgroundColor="#1E2F40">
+                
+                <HorizontalStackLayout>
+                    
+                <Entry x:Name="passwordEntry" Placeholder="Twoje hasło" IsPassword="True" BackgroundColor="#1E2F40" WidthRequest="315">
                     <Entry.GestureRecognizers>
                         <PointerGestureRecognizer PointerEntered="passwordMouseEnter" PointerExited="passwordMouseExit"></PointerGestureRecognizer>
                     </Entry.GestureRecognizers>
                 </Entry>
+
+                    <Label x:Name="passwordToggleLabel" Text="🔒" FontSize="18" HorizontalOptions="End" VerticalOptions="Center" Margin="10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TogglePassword"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </HorizontalStackLayout>
                 <Label x:Name="passwordErrorLabel" Margin="3" FontSize="13" TextColor="#ff4747"></Label>
 
             </VerticalStackLayout>

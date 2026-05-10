@@ -58,6 +58,10 @@ public partial class RegisterPage : ContentPage
         };
         db.AddUser(user);
 
+        Navigation.PushAsync(new MainPage());
+
+        DisplayAlert("Sukces", "Pomyślnie utworzono konto.", "OK");
+
         usernameEntry.Text = string.Empty;
         passwordEntry.Text = string.Empty;
     }
@@ -65,6 +69,21 @@ public partial class RegisterPage : ContentPage
     private void LoginTapped(object sender, TappedEventArgs e)
     { 
             Navigation.PushAsync(new LogInPage());
+    }
+
+    private void TogglePassword(object sender, EventArgs e)
+    {
+        if(passwordEntry.IsPassword)
+        {
+            passwordEntry.IsPassword = false;
+            passwordToggleLabel.Text = "🔓";
+        }
+        else
+        {
+            passwordEntry.IsPassword = true;
+            passwordToggleLabel.Text = "🔒";
+
+        }
     }
 
     //HOOVER
