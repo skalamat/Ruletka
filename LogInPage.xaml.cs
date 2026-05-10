@@ -9,7 +9,7 @@ public partial class LogInPage : ContentPage
 	}
     private void return_Clicked(object sender, EventArgs e)
     {
-        Navigation.PopAsync();
+        Navigation.PushAsync(new MainPage());
     }
     private void logInButton_Clicked(object sender, EventArgs e)
     {
@@ -18,7 +18,7 @@ public partial class LogInPage : ContentPage
 
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            error.Text = "Wszystkie pola muszą być wypełnione";
+            errorLabel.Text = "Wszystkie pola muszą być wypełnione";
             return;
         }
 
@@ -32,7 +32,7 @@ public partial class LogInPage : ContentPage
             }
             else
             {
-                error.Text = "Błędna nazwa użytownika lub hasło!";
+                errorLabel.Text = "Błędna nazwa użytownika lub hasło!";
             }
         }
     }

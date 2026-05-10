@@ -15,7 +15,7 @@ namespace Ruletka
         public int UserId { get; set; }
 
         [Column("round_id")]
-        public int RoundId { get; set; }
+        public int GameRoundId { get; set; }
 
         [Column("bet_type")]
         public string BetType { get; set; }

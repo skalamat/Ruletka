@@ -31,7 +31,7 @@
 
                 <Button Text="Zaloguj się" x:Name="logInButton" Clicked="logInButton_Clicked"></Button>
 
-                <Label x:Name="error"></Label>
+                <Label x:Name="errorLabel"></Label>
             </VerticalStackLayout>
         </Grid>
         <BoxView Style="{StaticResource BottomLineStyle}"></BoxView>
