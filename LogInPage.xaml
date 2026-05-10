@@ -13,6 +13,7 @@
     <StackLayout Background="#0A0F1C" HeightRequest="50" VerticalOptions="Start">
 
         <VerticalStackLayout>
+            
             <Border StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8" VerticalOptions="Center" Margin="8" HorizontalOptions="Start" x:Name="ReturnBorder">
                 <Border.GestureRecognizers>
                     <PointerGestureRecognizer PointerEntered="ReturnHoverEntered" PointerExited="ReturnHoverExited"/>
@@ -62,8 +63,7 @@
                     <PointerGestureRecognizer PointerEntered="loginMouseEnter" PointerExited="loginMouseExit"></PointerGestureRecognizer>
                 </Button.GestureRecognizers>
             </Button>
-
-
+            
         </VerticalStackLayout>
     </StackLayout>
 </ContentPage>
