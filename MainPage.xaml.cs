@@ -1,12 +1,13 @@
-﻿namespace Ruletka
-{
+﻿using Ruletka.Data;
+namespace Ruletka
+    {
     public partial class MainPage : ContentPage
     {
         private readonly RouletteWheelDrawable _drawable = new();
         private float _currentAngle = 0f;
         private bool _isSpinning = false;
 
-        public double balance = 500;
+        public double balance;
         public double chosen_chip_value = 0;
 
         double[] current_bet_on = new double[37];
@@ -18,6 +19,19 @@
 
         private List<Grid> _betGrids;
 
+        protected override void OnAppearing()
+        {
+            if (App.CurrentUser != null)
+            {
+                balance = App.CurrentUser.Balance;
+                balance_label.Text = Math.Round(balance, 2).ToString() + "$";
+                loginLabel.Text = "Wyloguj się";
+            }
+            else
+            {
+                loginLabel.Text = "Zaloguj się";
+            }
+        }
         public MainPage()
         {
             InitializeComponent();
@@ -36,9 +50,21 @@
             };
         }
 
-        private void AccountTapped(object sender, TappedEventArgs e)
+        private void LoginTapped(object sender, TappedEventArgs e)
         {
-            Navigation.PushAsync(new AccountPage());
+            if(loginLabel.Text == "Zaloguj się")
+            {
+                Navigation.PushAsync(new LogInPage());
+            }
+            else if(loginLabel.Text == "Wyloguj się")
+            {
+                App.CurrentUser = null;
+                Navigation.PushAsync(new MainPage());
+            }
+        }
+        private void RegisterTapped(object sender, TappedEventArgs e)
+        {
+            Navigation.PushAsync(new RegisterPage());
         }
 
         #region przyciski ruletki
@@ -68,7 +94,11 @@
                 current_bet += current_bet_on[i];
             }
             current_bet += current_bet_on_black + current_bet_on_red;
-
+            if(App.CurrentUser == null)
+            {
+                DisplayAlert("Błąd", "Musisz być zalogowany, aby grać.", "OK");
+                return;
+            }
             if (!current_bet_on.Any(bet => bet > 0) && current_bet_on_black == 0 && current_bet_on_red == 0)
             {
                 result_label.Text = "Nie postawiono żadnego zakładu";
@@ -133,6 +163,10 @@
             balance_label.Text = Math.Round(balance, 2).ToString() + "$";
             await Task.Delay(1000);
             ClearBets();
+            using (var db = new RuletkaDb())
+            {
+                db.UpdateBalance(App.CurrentUser.Id, balance);
+            }
         }
 
         private void CancelButton_Clicked(object sender, EventArgs e)
@@ -521,8 +555,11 @@
         #endregion
 
         #region hoovers
-        private void AccountHoverEntered(object? sender, PointerEventArgs e) { AccountBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0")); }
-        private void AccountHoverExited(object? sender, PointerEventArgs e) { AccountBorder.Background = new SolidColorBrush(Colors.SlateGray); }
+        private void LoginHoverEntered(object? sender, PointerEventArgs e) { LoginBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0")); }
+        private void LoginHoverExited(object? sender, PointerEventArgs e) { LoginBorder.Background = new SolidColorBrush(Colors.SlateGray); }
+
+        private void RegisterHoverEntered(object? sender, PointerEventArgs e) { RegisterBorder.Background = new SolidColorBrush(Color.FromArgb("#a0a0a0")); }
+        private void RegisterHoverExited(object? sender, PointerEventArgs e) { RegisterBorder.Background = new SolidColorBrush(Colors.SlateGray); }
 
         private void SpinButton_OnPointerEntered(object sender, PointerEventArgs e) { SpinButton.BackgroundColor = Color.FromArgb("#B81304"); }
         private void SpinButton_OnPointerExited(object sender, PointerEventArgs e) { SpinButton.BackgroundColor = Colors.Maroon; }

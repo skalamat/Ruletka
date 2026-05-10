@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ruletka.RegisterPage"
+             Title="RegisterPage" WidthRequest="400" HeightRequest="600">
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E2F40" Offset="0.0" />
+            <GradientStop Color="Black" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
+    <StackLayout Background="#0A0F1C" HeightRequest="50" VerticalOptions="Start">
+        
+        <VerticalStackLayout>
+            <Border StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8" VerticalOptions="Center" Margin="8" HorizontalOptions="Start" x:Name="ReturnBorder">
+                <Border.GestureRecognizers>
+                    <PointerGestureRecognizer PointerEntered="ReturnHoverEntered" PointerExited="ReturnHoverExited"/>
+                </Border.GestureRecognizers>
+                <Button Text="⭠ Wróć" x:Name="ReturnButton" Clicked="return_Clicked" WidthRequest="80" Background="SlateGray" HeightRequest="35" MinimumHeightRequest="0" TextColor="#F9F6EE" VerticalOptions="Center"></Button>
+            </Border>
+
+            <Label Text="Utwórz konto" FontSize="23" Margin="15,15,15,0" FontAttributes="Bold"></Label>
+
+            <HorizontalStackLayout Margin="15,10,10,10">
+                <Label Text="Masz juz konto?" Margin="3"></Label>
+                <Label Text="Zaloguj się" Margin="3" TextColor="#0c49ca" x:Name="loginLabel">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LoginTapped"></TapGestureRecognizer>
+                        <PointerGestureRecognizer PointerEntered="LoginMouseEnter" PointerExited="LoginMouseExit"></PointerGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Padding="5">
+                <Border StrokeShape="RoundRectangle 15" Stroke="Green" Margin="0,0,20,0">
+                <Label Text="500$ na start" BackgroundColor="#8052fa77" WidthRequest="130" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                </Border>
+
+                <Border StrokeShape="RoundRectangle 15" Stroke="Green" Margin="0,0,20,0">
+                    <Label Text="Graj bez limitu" BackgroundColor="#8052fa77" WidthRequest="130" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                </Border>
+            </HorizontalStackLayout>
+            
+            <VerticalStackLayout Margin="25">
+                
+                <Label Text="Nazwa użytkownika" Margin="3" FontSize="15"></Label>
+                <Entry x:Name="usernameEntry" Placeholder="Twoja nazwa" BackgroundColor="#1E2F40" WidthRequest="350">
+                    <Entry.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="userNameMouseEnter" PointerExited="userNameMouseExit"></PointerGestureRecognizer>
+                    </Entry.GestureRecognizers>
+                </Entry>
+                <Label x:Name="usernameErrorLabel" Margin="3" FontSize="13" TextColor="#ff4747"></Label>
+
+                <Label Text="Hasło" Margin="3" FontSize="15"></Label>
+                
+                <HorizontalStackLayout>
+                    
+                <Entry x:Name="passwordEntry" Placeholder="Twoje hasło" IsPassword="True" BackgroundColor="#1E2F40" WidthRequest="315">
+                    <Entry.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="passwordMouseEnter" PointerExited="passwordMouseExit"></PointerGestureRecognizer>
+                    </Entry.GestureRecognizers>
+                </Entry>
+
+                    <Label x:Name="passwordToggleLabel" Text="🔒" FontSize="18" HorizontalOptions="End" VerticalOptions="Center" Margin="10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TogglePassword"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </HorizontalStackLayout>
+                <Label x:Name="passwordErrorLabel" Margin="3" FontSize="13" TextColor="#ff4747"></Label>
+
+            </VerticalStackLayout>
+
+            <Button Text="Zarejestruj się" x:Name="registerButton" Clicked="registerbutton_Clicked" WidthRequest="300" BackgroundColor="#375776" TextColor="#F9F6EE">
+                <Button.GestureRecognizers>
+                    <PointerGestureRecognizer PointerEntered="registerMouseEnter" PointerExited="registerMouseExit"></PointerGestureRecognizer>
+                </Button.GestureRecognizers>
+            </Button>
+
+            
+        </VerticalStackLayout>
+    </StackLayout>
+</ContentPage>
