@@ -166,6 +166,13 @@ namespace Ruletka
             using (var db = new RuletkaDb())
             {
                 db.UpdateBalance(App.CurrentUser.Id, balance);
+                GameRound newRound = new GameRound
+                {
+                    WinningColor = winning_color,
+                    WinningNumber = winning_number
+                };
+                db.AddGameRound(newRound);
+
             }
         }
 
