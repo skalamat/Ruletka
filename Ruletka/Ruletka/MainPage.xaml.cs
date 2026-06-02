@@ -48,6 +48,13 @@ namespace Ruletka
                 Bet30Grid, Bet31Grid, Bet32Grid, Bet33Grid, Bet34Grid, Bet35Grid,
                 Bet36Grid, BetRedGrid, BetBlackGrid
             };
+            using (var db = new RuletkaDb())
+            {
+                foreach (var round in db.GameRounds)
+                {
+                    BetsHistoryLabel.Text += $"Runda {round.Id}: Numer {round.WinningNumber}, Kolor {round.WinningColor}\n";
+                }
+            }
         }
 
         private void LoginTapped(object sender, TappedEventArgs e)
@@ -172,7 +179,11 @@ namespace Ruletka
                     WinningNumber = winning_number
                 };
                 db.AddGameRound(newRound);
-
+                
+                foreach(var round in db.GameRounds)
+                {
+                    BetsHistoryLabel.Text += $"Runda {round.Id}: Numer {round.WinningNumber}, Kolor {round.WinningColor}\n";
+                }
             }
         }
 
