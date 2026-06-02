@@ -23,6 +23,21 @@ namespace Ruletka.Data
             Users.Add(user);
             SaveChanges();
         }
+        public void AddTBet(Bet bet)
+        {
+            Bets.Add(bet);
+            SaveChanges();
+        }
+        public void AddGameRound(GameRound gameRound)
+        {
+            GameRounds.Add(gameRound);
+            SaveChanges();
+        }
+        public void AddTransaction(Transaction transaction)
+        {
+            Transactions.Add(transaction);
+            SaveChanges();
+        }
         public User LoginUser(string username, string password)
         {
             foreach (var user in Users)
