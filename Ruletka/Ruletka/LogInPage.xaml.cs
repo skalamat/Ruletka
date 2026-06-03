@@ -9,7 +9,7 @@ public partial class LogInPage : ContentPage
 	}
     private void return_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage());
+        Navigation.PopAsync();
     }
     private void logInButton_Clicked(object sender, EventArgs e)
     {
@@ -28,7 +28,7 @@ public partial class LogInPage : ContentPage
             if (logedIn != null)
             {
                 App.CurrentUser = logedIn;
-                Navigation.PushAsync(new MainPage());
+                Navigation.PopAsync();
                 DisplayAlert("Sukces", "Pomyślnie zalogowano.", "OK");
             }
         else

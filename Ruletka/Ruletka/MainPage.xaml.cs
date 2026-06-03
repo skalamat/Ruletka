@@ -20,6 +20,7 @@ namespace Ruletka
 
         private List<Grid> _betGrids;
 
+        private IDispatcherTimer _timer;
         protected override void OnAppearing()
         {
             if (App.CurrentUser != null)
@@ -49,6 +50,7 @@ namespace Ruletka
                 Bet30Grid, Bet31Grid, Bet32Grid, Bet33Grid, Bet34Grid, Bet35Grid,
                 Bet36Grid, BetRedGrid, BetBlackGrid
             };
+
             using (var db = new RuletkaDb())
             {
                 var rounds = db.GameRounds.OrderByDescending(r => r.Id).Take(5).ToList();
@@ -91,8 +93,33 @@ namespace Ruletka
                     BetsHistoryStackLayout.Children.Add(newBorder);
                 }
             }
+            if (_timer == null)
+            {
+                _timer = Dispatcher.CreateTimer();
+                _timer.Interval = TimeSpan.FromSeconds(60);
+                _timer.Tick += OnTimerTick;
+                _timer.Start();
+            }
         }
+        #region timer
+        private void OnTimerTick(object? sender, EventArgs e)
+        {
+            if (App.CurrentUser == null) return;
 
+            using var db = new RuletkaDb();
+            var user = db.Users.Find(App.CurrentUser.Id);
+            if (user == null) return;
+
+            user.Balance += 50;
+            db.SaveChanges();
+
+            App.CurrentUser.Balance = user.Balance;
+            balance = user.Balance;
+            balance_label.Text = Math.Round(balance, 2).ToString() + "$";
+        }
+        #endregion
+
+        #region logowanie/rejestrowanie
         private void LoginTapped(object sender, TappedEventArgs e)
         {
             if(loginLabel.Text == "Zaloguj się")
@@ -102,13 +129,13 @@ namespace Ruletka
             else if(loginLabel.Text == "Wyloguj się")
             {
                 App.CurrentUser = null;
-                Navigation.PushAsync(new MainPage());
             }
         }
         private void RegisterTapped(object sender, TappedEventArgs e)
         {
             Navigation.PushAsync(new RegisterPage());
         }
+        #endregion
 
         #region przyciski ruletki
         public void ClearBets()

@@ -10,7 +10,7 @@ public partial class RegisterPage : ContentPage
 	}
     private void return_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage());
+        Navigation.PopAsync();
     }
     private void registerbutton_Clicked(object sender, EventArgs e)
     {
@@ -58,7 +58,7 @@ public partial class RegisterPage : ContentPage
         };
         db.AddUser(user);
 
-        Navigation.PushAsync(new MainPage());
+        Navigation.PopAsync();
 
         DisplayAlert("Sukces", "Pomyślnie utworzono konto.", "OK");
 
