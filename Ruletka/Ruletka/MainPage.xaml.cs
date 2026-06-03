@@ -12,11 +12,39 @@ namespace Ruletka
         public double chosen_chip_value = 0;
 
         double[] current_bet_on = new double[37];
-
         double current_bet_on_red = 0;
         double current_bet_on_black = 0;
 
-        //public double current_bet = 0;
+        private double _currentBet;
+        public double current_bet
+        {
+            get => _currentBet;
+            set
+            {
+                _currentBet = value;
+                total_current_bet.Text = _currentBet.ToString() + "$";
+            }
+        }
+        private double _currentBetOnNumbers;
+        public double currentBetOnNumbers
+        {
+            get => _currentBetOnNumbers;
+            set
+            {
+                _currentBetOnNumbers = value;
+                current_number_bet_label.Text = currentBetOnNumbers.ToString() + "$";
+            }
+        }
+        private double _currentBetOnColors;
+        public double currentBetOnColors
+        {
+            get => _currentBetOnColors;
+            set
+            {
+                _currentBetOnColors = value;
+                current_color_bet_label.Text = currentBetOnColors.ToString() + "$";
+            }
+        }
 
         private List<Grid> _betGrids;
 
@@ -158,7 +186,7 @@ namespace Ruletka
             string winning_color;
             bool is_bet_won = false;
             double value_won = 0;
-            double current_bet = 0;
+            current_bet = 0;
             for (int i = 0; i <=36; i++)
             {
                 current_bet += current_bet_on[i];
@@ -226,8 +254,6 @@ namespace Ruletka
             {
                 result_label.Text += $"\nPrzegrałeś {current_bet}$";
             }
-
-
             balance -= current_bet;
             balance += value_won;
             balance_label.Text = Math.Round(balance, 2).ToString() + "$";
@@ -287,6 +313,10 @@ namespace Ruletka
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
             ClearBets();
+
+            current_bet = 0;
+            currentBetOnNumbers = 0;
+            currentBetOnColors = 0;
         }
         #endregion
 
@@ -370,12 +400,21 @@ namespace Ruletka
 
         #region zakłady
 
-        public double PlaceBet(double currentBet)
+        public double PlaceBet(double currentBet, bool isColor = false)
         {
             if (chosen_chip_value == 0)
             {
                 DisplayAlert("Błąd", "Wybierz wartość żetonu przed postawieniem zakładu.", "OK");
                 return currentBet;
+            }
+            current_bet += chosen_chip_value;
+            if (isColor)
+            {
+                currentBetOnColors += chosen_chip_value;
+            }
+            else
+            {
+                currentBetOnNumbers += chosen_chip_value;
             }
             return currentBet + chosen_chip_value;
         }
@@ -588,7 +627,7 @@ namespace Ruletka
         // KOLORY
         private void BetRedButton_Clicked(object sender, EventArgs e)
         {
-            current_bet_on_red = PlaceBet(current_bet_on_red);
+            current_bet_on_red = PlaceBet(current_bet_on_red, true);
             if (current_bet_on_red == 0) return;
 
             var existing = BetRedGrid.Children.OfType<Label>().FirstOrDefault();
@@ -609,7 +648,7 @@ namespace Ruletka
 
         private void BetBlackButton_Clicked(object sender, EventArgs e)
         {
-            current_bet_on_black = PlaceBet(current_bet_on_black);
+            current_bet_on_black = PlaceBet(current_bet_on_black, true);
             if (current_bet_on_black == 0) return;
 
             var existing = BetBlackGrid.Children.OfType<Label>().FirstOrDefault();

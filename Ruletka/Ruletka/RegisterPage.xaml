@@ -12,7 +12,7 @@
     
     <StackLayout Background="#0A0F1C" HeightRequest="50" VerticalOptions="Start">
         
-        <VerticalStackLayout HorizontalOptions="Fill">
+        <VerticalStackLayout HorizontalOptions="Center">
             <Border StrokeShape="RoundRectangle 12" Stroke="#36404A" StrokeThickness="0.8" VerticalOptions="Center" Margin="8" HorizontalOptions="Start" x:Name="ReturnBorder">
                 <Border.GestureRecognizers>
                     <PointerGestureRecognizer PointerEntered="ReturnHoverEntered" PointerExited="ReturnHoverExited"/>
@@ -34,15 +34,15 @@
 
             <HorizontalStackLayout HorizontalOptions="Center" Padding="5">
                 <Border StrokeShape="RoundRectangle 15" Stroke="Green" Margin="10">
-                <Label Text="500$ na start" BackgroundColor="#8052fa77" WidthRequest="110" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center"></Label>
+                <Label Text="500$ na start" BackgroundColor="#8052fa77" WidthRequest="105" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                 </Border>
 
                 <Border StrokeShape="RoundRectangle 15" Stroke="Green" Margin="10">
-                    <Label Text="Co minutę dodatkowe 50$" BackgroundColor="#8052fa77" WidthRequest="110" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center"></Label>
+                    <Label Text="Co minutę dodatkowe 50$" BackgroundColor="#8052fa77" WidthRequest="105" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                 </Border>
 
                 <Border StrokeShape="RoundRectangle 15" Stroke="Green" Margin="10">
-                    <Label Text="Graj bez limitu" BackgroundColor="#8052fa77" WidthRequest="110" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Center"></Label>
+                    <Label Text="Graj bez limitu" BackgroundColor="#8052fa77" WidthRequest="105" HeightRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                 </Border>
             </HorizontalStackLayout>
             

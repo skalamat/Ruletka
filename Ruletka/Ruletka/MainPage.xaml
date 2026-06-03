@@ -502,23 +502,24 @@
                             <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Obecny zakład</Label>
 
                             <Border Background="LightGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Margin="0,5,0,0">
-                                <HorizontalStackLayout HeightRequest="30">
-                                    <Label x:Name="current_color_label"></Label>
-                                    <Label x:Name="current_color_bet_label"></Label>
+                                <HorizontalStackLayout HeightRequest="25">
+                                    <Label x:Name="current_color_label" FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="Black" HorizontalTextAlignment="Start" WidthRequest="80">Na kolory</Label>
+                                    <Label x:Name="current_color_bet_label" FontSize="16" Margin="20,0,0,0" TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="End" WidthRequest="50">0$</Label>
                                 </HorizontalStackLayout>
                             </Border>
 
                             <Border Background="LightGray" StrokeShape="RoundRectangle 12" Stroke="#FFFFFF" StrokeThickness="0.8" Margin="0,10,0,0">
-                                <HorizontalStackLayout HeightRequest="30">
-                                    <Label x:Name="current_number_label"></Label>
-                                    <Label x:Name="current_number_bet_label"></Label>
+                                <HorizontalStackLayout HeightRequest="25">
+                                    <Label x:Name="current_number_label" FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="Black" WidthRequest="80">Na numery</Label>
+                                    <Label x:Name="current_number_bet_label" FontSize="16" Margin="20,0,0,0" TextColor="Black" VerticalTextAlignment="Center" WidthRequest="50" HorizontalTextAlignment="End">0$</Label>
                                 </HorizontalStackLayout>
                             </Border>
+                            
                             <BoxView Style="{StaticResource BottomLineStyle}" Margin="0,10,0,0" Color="Black" HeightRequest="2"></BoxView>
 
                             <HorizontalStackLayout>
                                 <Label FontSize="16" FontFamily="PlayfairDisplay" HorizontalOptions="Start" Margin="4" TextColor="#F9F6EE">Łączny zakład:</Label>
-                                <Label x:Name="total_current_bet"></Label>
+                                <Label FontSize="16" HorizontalOptions="Start" Margin="4" TextColor="#F9F6EE" x:Name="total_current_bet" VerticalTextAlignment="Center">0$</Label>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
