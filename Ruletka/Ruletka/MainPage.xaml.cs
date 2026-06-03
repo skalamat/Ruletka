@@ -267,8 +267,17 @@ namespace Ruletka
                     WinningColor = winning_color,
                     WinningNumber = winning_number
                 };
-
                 db.AddGameRound(newRound);
+
+                Bet newBet = new Bet
+                {
+                    UserId = App.CurrentUser.Id,
+                    GameRoundId = newRound.Id,
+                    BetType = is_bet_won ? "wygrana" : "przegrana",
+                    Value = current_bet
+                };
+                db.AddBet(newBet);
+
                 Label newLabel = new Label
                 {
                     Text = newRound.WinningNumber.ToString(),

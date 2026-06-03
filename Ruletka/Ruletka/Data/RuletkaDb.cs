@@ -23,7 +23,7 @@ namespace Ruletka.Data
             Users.Add(user);
             SaveChanges();
         }
-        public void AddTBet(Bet bet)
+        public void AddBet(Bet bet)
         {
             Bets.Add(bet);
             SaveChanges();
