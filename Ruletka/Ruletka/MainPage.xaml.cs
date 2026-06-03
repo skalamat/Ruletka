@@ -15,6 +15,9 @@ namespace Ruletka
         double current_bet_on_red = 0;
         double current_bet_on_black = 0;
 
+        public int gamesPlayed = 0;
+        public double valueWon = 0;
+
         private double _currentBet;
         public double current_bet
         {
@@ -56,10 +59,35 @@ namespace Ruletka
                 balance = App.CurrentUser.Balance;
                 balance_label.Text = Math.Round(balance, 2).ToString() + "$";
                 loginLabel.Text = "Wyloguj się";
+                using (var db = new RuletkaDb())
+                {
+                    foreach (var bet in db.Bets)
+                    {
+                        if (App.CurrentUser.Id == bet.UserId)
+                        {
+                            gamesPlayed++;
+                            if(bet.BetType == "wygrana")
+                            {
+                                valueWon += bet.Value;
+                            }
+                        }
+                    }
+                    games_played_label.Text = gamesPlayed.ToString();
+                    total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
+                }
             }
             else
             {
                 loginLabel.Text = "Zaloguj się";
+
+                games_played_label.Text = "0";
+                gamesPlayed = 0;
+
+                balance = 0;
+                balance_label.Text = "0$";
+
+                valueWon = 0;
+                total_cash_won_label.Text = "0$";
             }
         }
         public MainPage()
@@ -156,7 +184,18 @@ namespace Ruletka
             }
             else if(loginLabel.Text == "Wyloguj się")
             {
+                loginLabel.Text = "Zaloguj się";
                 App.CurrentUser = null;
+
+                games_played_label.Text = "0";
+                gamesPlayed = 0;
+
+                balance = 0;
+                balance_label.Text = "0$";
+
+                valueWon = 0;
+                total_cash_won_label.Text = "0$";
+
             }
         }
         private void RegisterTapped(object sender, TappedEventArgs e)
@@ -187,12 +226,12 @@ namespace Ruletka
             bool is_bet_won = false;
             double value_won = 0;
             current_bet = 0;
-            for (int i = 0; i <=36; i++)
+            for (int i = 0; i <= 36; i++)
             {
                 current_bet += current_bet_on[i];
             }
             current_bet += current_bet_on_black + current_bet_on_red;
-            if(App.CurrentUser == null)
+            if (App.CurrentUser == null)
             {
                 DisplayAlert("Błąd", "Musisz być zalogowany, aby grać.", "OK");
                 return;
@@ -213,9 +252,9 @@ namespace Ruletka
 
 
 
-            if (winning_number % 2 ==0)
+            if (winning_number % 2 == 0)
             {
-                winning_color = "czarny"; 
+                winning_color = "czarny";
             }
             else
             {
@@ -223,7 +262,7 @@ namespace Ruletka
             }
 
             result_label.Text = $"Wylosowano numer {winning_number}, kolor {winning_color}\n";
-            for (int i = 0; i <=36; i++)
+            for (int i = 0; i <= 36; i++)
             {
                 if (current_bet_on[i] > 0)
                 {
@@ -243,7 +282,7 @@ namespace Ruletka
                     value_won = current_bet_on_black * 2;
                     is_bet_won = true;
                 }
-                else if (winning_color == "czerwony" && current_bet_on_red >0)
+                else if (winning_color == "czerwony" && current_bet_on_red > 0)
                 {
                     result_label.Text += $"\nWygrałeś {current_bet_on_red * 2}$ na kolorze czerwonym!";
                     value_won = current_bet_on_red * 2;
@@ -294,30 +333,42 @@ namespace Ruletka
                     WidthRequest = 150,
                     HeightRequest = 38,
                     Margin = new Thickness(4),
-                    Stroke = Color.FromHex("#9b7fe8"),
+                    Stroke = Color.FromHex("#1E2F40"),
                     StrokeThickness = 2,
                     StrokeShape = new RoundRectangle { CornerRadius = 6 }
                 };
                 if (newRound.WinningColor == "czerwony")
-                    {
-                        newBorder.BackgroundColor = Color.FromHex("#FF0000");
-                    }
-                    else if (newRound.WinningColor == "czarny")
-                    {
-                        newBorder.BackgroundColor = Color.FromHex("#242424");
-                    }
-                    else
-                    {
-                        newBorder.BackgroundColor = Color.FromHex("#008000");
-                    }
-                    BetsHistoryStackLayout.Children.Insert(0, newBorder);
+                {
+                    newBorder.BackgroundColor = Color.FromHex("#FF0000");
+                }
+                else if (newRound.WinningColor == "czarny")
+                {
+                    newBorder.BackgroundColor = Color.FromHex("#242424");
+                }
+                else
+                {
+                    newBorder.BackgroundColor = Color.FromHex("#008000");
+                }
+                BetsHistoryStackLayout.Children.Insert(0, newBorder);
 
-                    if (BetsHistoryStackLayout.Children.Count > 5)
-                    {
+                if (BetsHistoryStackLayout.Children.Count > 5)
+                {
                     BetsHistoryStackLayout.Children.RemoveAt(5);
+                }
+
+                if (App.CurrentUser.Id == newBet.UserId)
+                {
+                    gamesPlayed++;
+                    if (newBet.BetType == "wygrana")
+                    {
+                        valueWon += newBet.Value;
                     }
+                }
+                games_played_label.Text = gamesPlayed.ToString();
+                total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
             }
         }
+        
 
         private void CancelButton_Clicked(object sender, EventArgs e)
         {
