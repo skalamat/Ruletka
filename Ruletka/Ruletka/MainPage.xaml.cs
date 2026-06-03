@@ -1,4 +1,5 @@
-﻿using Ruletka.Data;
+﻿using Microsoft.Maui.Controls.Shapes;
+using Ruletka.Data;
 namespace Ruletka
     {
     public partial class MainPage : ContentPage
@@ -50,9 +51,44 @@ namespace Ruletka
             };
             using (var db = new RuletkaDb())
             {
-                foreach (var round in db.GameRounds)
+                var rounds = db.GameRounds.OrderByDescending(r => r.Id).Take(5).ToList();
+
+                foreach (var round in rounds)
                 {
-                    BetsHistoryLabel.Text += $"Runda {round.Id}: Numer {round.WinningNumber}, Kolor {round.WinningColor}\n";
+                    Label newLabel = new Label
+                    {
+                        Text = round.WinningNumber.ToString(),
+                        TextColor = Colors.White,
+                        FontSize = 16,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        VerticalTextAlignment = TextAlignment.Center,
+                    };
+
+                    Border newBorder = new Border
+                    {
+                        Content = newLabel,
+                        WidthRequest = 150,
+                        HeightRequest = 38,
+                        Margin = new Thickness(4),
+                        Stroke = Color.FromHex("#1E2F40"),
+                        StrokeThickness = 2,
+                        StrokeShape = new RoundRectangle { CornerRadius = 6 }
+                    };
+
+                    if (round.WinningColor == "czerwony")
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#FF0000");
+                    }
+                    else if (round.WinningColor == "czarny")
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#242424");
+                    }
+                    else
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#008000");
+                    }
+                    BetsHistoryStackLayout.Children.Add(newBorder);
                 }
             }
         }
@@ -178,12 +214,46 @@ namespace Ruletka
                     WinningColor = winning_color,
                     WinningNumber = winning_number
                 };
+
                 db.AddGameRound(newRound);
-                
-                foreach(var round in db.GameRounds)
+                Label newLabel = new Label
                 {
-                    BetsHistoryLabel.Text += $"Runda {round.Id}: Numer {round.WinningNumber}, Kolor {round.WinningColor}\n";
-                }
+                    Text = newRound.WinningNumber.ToString(),
+                    TextColor = Colors.White,
+                    FontSize = 16,
+                    FontAttributes = FontAttributes.Bold,
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    VerticalTextAlignment = TextAlignment.Center,
+                };
+
+                Border newBorder = new Border
+                {
+                    Content = newLabel,
+                    WidthRequest = 150,
+                    HeightRequest = 38,
+                    Margin = new Thickness(4),
+                    Stroke = Color.FromHex("#9b7fe8"),
+                    StrokeThickness = 2,
+                    StrokeShape = new RoundRectangle { CornerRadius = 6 }
+                };
+                if (newRound.WinningColor == "czerwony")
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#FF0000");
+                    }
+                    else if (newRound.WinningColor == "czarny")
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#242424");
+                    }
+                    else
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#008000");
+                    }
+                    BetsHistoryStackLayout.Children.Insert(0, newBorder);
+
+                    if (BetsHistoryStackLayout.Children.Count > 5)
+                    {
+                    BetsHistoryStackLayout.Children.RemoveAt(5);
+                    }
             }
         }
 

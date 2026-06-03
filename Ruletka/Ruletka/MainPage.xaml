@@ -548,9 +548,8 @@
                     <!--HISTORIA-->
                     <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,15,0,0">
                         <VerticalStackLayout>
-                            <Label  Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Historia zakładów</Label>
-                            <Label  Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE" x:Name="BetsHistoryLabel"></Label>
-                            
+                            <Label  Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Ostatnie zakłady</Label>
+                            <VerticalStackLayout x:Name="BetsHistoryStackLayout" Margin="0,5,0,0"/>
                         </VerticalStackLayout>
                     </Border>   
                 </StackLayout>
