@@ -17,6 +17,7 @@ namespace Ruletka
 
         public int gamesPlayed = 0;
         public double valueWon = 0;
+        public int betsWon = 0;
 
         private double _currentBet;
         public double current_bet
@@ -69,11 +70,13 @@ namespace Ruletka
                             if(bet.BetType == "wygrana")
                             {
                                 valueWon += bet.Value;
+                                betsWon += 1;
                             }
                         }
                     }
                     games_played_label.Text = gamesPlayed.ToString();
                     total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
+                    games_won_label.Text = betsWon.ToString();
                 }
             }
             else
@@ -88,6 +91,8 @@ namespace Ruletka
 
                 valueWon = 0;
                 total_cash_won_label.Text = "0$";
+
+                games_won_label.Text = "0";
             }
         }
         public MainPage()
@@ -362,10 +367,12 @@ namespace Ruletka
                     if (newBet.BetType == "wygrana")
                     {
                         valueWon += newBet.Value;
+                        betsWon += 1;
                     }
                 }
                 games_played_label.Text = gamesPlayed.ToString();
                 total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
+                games_won_label.Text = betsWon.ToString();
             }
         }
         

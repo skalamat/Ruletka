@@ -541,7 +541,7 @@
 
                             <HorizontalStackLayout>
                                 <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Wygrane gry:</Label>
-                                <Label x:Name="games_won_label"></Label>
+                                <Label x:Name="games_won_label">0</Label>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
