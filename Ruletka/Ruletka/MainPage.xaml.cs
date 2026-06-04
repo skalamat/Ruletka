@@ -83,8 +83,8 @@ namespace Ruletka
             {
                 loginLabel.Text = "Zaloguj się";
 
-                games_played_label.Text = "0";
                 gamesPlayed = 0;
+                games_played_label.Text = "0";
 
                 balance = 0;
                 balance_label.Text = "0$";
@@ -92,7 +92,10 @@ namespace Ruletka
                 valueWon = 0;
                 total_cash_won_label.Text = "0$";
 
+                betsWon = 0;
                 games_won_label.Text = "0";
+
+
             }
         }
         public MainPage()
@@ -189,11 +192,13 @@ namespace Ruletka
             }
             else if(loginLabel.Text == "Wyloguj się")
             {
+                DisplayAlert("Wylogowano", "Zostałeś wylogowany z konta.", "OK");
+
                 loginLabel.Text = "Zaloguj się";
                 App.CurrentUser = null;
 
-                games_played_label.Text = "0";
                 gamesPlayed = 0;
+                games_played_label.Text = "0";
 
                 balance = 0;
                 balance_label.Text = "0$";
@@ -201,6 +206,8 @@ namespace Ruletka
                 valueWon = 0;
                 total_cash_won_label.Text = "0$";
 
+                betsWon = 9;
+                games_won_label.Text = "0";
             }
         }
         private void RegisterTapped(object sender, TappedEventArgs e)

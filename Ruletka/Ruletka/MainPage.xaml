@@ -530,18 +530,18 @@
                             <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="17" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Statystyki gry</Label>
 
                             <HorizontalStackLayout>
-                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Zagrane gry:</Label>
-                                <Label x:Name="games_played_label">0</Label>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE" WidthRequest="170">Zagrane gry:</Label>
+                                <Label x:Name="games_played_label" VerticalTextAlignment="Center">0</Label>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout>
-                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Łączcna wygrana: </Label>
-                                <Label x:Name="total_cash_won_label"></Label>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE" WidthRequest="170">Łączcna wygrana: </Label>
+                                <Label x:Name="total_cash_won_label" VerticalTextAlignment="Center"></Label>
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout>
-                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE">Wygrane gry:</Label>
-                                <Label x:Name="games_won_label">0</Label>
+                                <Label FontFamily="PlayfairDisplay" FontSize="16" Margin="20,0,0,0" TextColor="#F9F6EE" WidthRequest="170">Wygrane gry:</Label>
+                                <Label x:Name="games_won_label" VerticalTextAlignment="Center">0</Label>
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Border>
