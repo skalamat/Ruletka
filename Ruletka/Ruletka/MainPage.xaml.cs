@@ -57,6 +57,10 @@ namespace Ruletka
         {
             if (App.CurrentUser != null)
             {
+                gamesPlayed = 0;
+                valueWon = 0;
+                betsWon = 0;
+
                 balance = App.CurrentUser.Balance;
                 balance_label.Text = Math.Round(balance, 2).ToString() + "$";
                 loginLabel.Text = "Wyloguj się";
@@ -206,7 +210,7 @@ namespace Ruletka
                 valueWon = 0;
                 total_cash_won_label.Text = "0$";
 
-                betsWon = 9;
+                betsWon = 0;
                 games_won_label.Text = "0";
             }
         }
@@ -231,7 +235,7 @@ namespace Ruletka
 
         private async void OnSpinClicked(object? sender, EventArgs e)
         {
-            result_label.Text = "";
+            cash_result_label.Text = "";
             Random r = new Random();
             int winning_number = r.Next(0, 37);
             string winning_color;
@@ -250,7 +254,7 @@ namespace Ruletka
             }
             if (!current_bet_on.Any(bet => bet > 0) && current_bet_on_black == 0 && current_bet_on_red == 0)
             {
-                result_label.Text = "Nie postawiono żadnego zakładu";
+                DisplayAlert("Błąd", "Nie postawiono zakładu", "OK");
                 return;
             }
             if (current_bet > balance)
@@ -268,7 +272,7 @@ namespace Ruletka
             {
                 winning_color = "czarny";
             }
-            else if(winning_number == 0)
+            else if (winning_number == 0)
             {
                 winning_color = "zielony";
             }
@@ -277,14 +281,13 @@ namespace Ruletka
                 winning_color = "czerwony";
             }
 
-            result_label.Text = $"Wylosowano numer {winning_number}, kolor {winning_color}\n";
             for (int i = 0; i <= 36; i++)
             {
                 if (current_bet_on[i] > 0)
                 {
                     if (winning_number == i)
                     {
-                        result_label.Text += $"\nWygrałeś {current_bet_on[i] * 35}$ na numerze {i}!";
+                        //cash_result_label.Text += $"Wygrałeś {current_bet_on[i] * 35}$ na numerze {i}!";
                         value_won += current_bet_on[i] * 35;
                         is_bet_won = true;
                     }
@@ -294,104 +297,149 @@ namespace Ruletka
             {
                 if (winning_color == "czarny" && current_bet_on_black > 0)
                 {
-                    result_label.Text += $"\nWygrałeś {current_bet_on_black * 2}$ na kolorze czarnym!";
+                    //cash_result_label.Text += $"Wygrałeś {current_bet_on_black * 2}$ na kolorze czarnym!";
                     value_won += current_bet_on_black * 2;
                     is_bet_won = true;
                 }
                 else if (winning_color == "czerwony" && current_bet_on_red > 0)
                 {
-                    result_label.Text += $"\nWygrałeś {current_bet_on_red * 2}$ na kolorze czerwonym!";
+                    //cash_result_label.Text += $"Wygrałeś {current_bet_on_red * 2}$ na kolorze czerwonym!";
                     value_won += current_bet_on_red * 2;
                     is_bet_won = true;
                 }
             }
-            if (is_bet_won == false)
-            {
-                result_label.Text += $"\nPrzegrałeś {current_bet}$";
-            }
-            balance -= current_bet;
-            balance += value_won;
-            balance_label.Text = Math.Round(balance, 2).ToString() + "$";
-            await Task.Delay(250);
-            ClearBets();
-            using (var db = new RuletkaDb())
-            {
-                db.UpdateBalance(App.CurrentUser.Id, balance);
-                GameRound newRound = new GameRound
+                if (is_bet_won == false)
                 {
-                    WinningColor = winning_color,
-                    WinningNumber = winning_number
-                };
-                db.AddGameRound(newRound);
-
-                Bet newBet = new Bet
-                {
-                    UserId = App.CurrentUser.Id,
-                    GameRoundId = newRound.Id,
-                    BetType = is_bet_won ? "wygrana" : "przegrana",
-                    Value = current_bet
-                };
-                db.AddBet(newBet);
-
-                Label newLabel = new Label
-                {
-                    Text = newRound.WinningNumber.ToString(),
-                    TextColor = Colors.White,
-                    FontSize = 16,
-                    FontAttributes = FontAttributes.Bold,
-                    HorizontalTextAlignment = TextAlignment.Center,
-                    VerticalTextAlignment = TextAlignment.Center,
-                };
-
-                Border newBorder = new Border
-                {
-                    Content = newLabel,
-                    WidthRequest = 150,
-                    HeightRequest = 38,
-                    Margin = new Thickness(4),
-                    Stroke = Color.FromHex("#1E2F40"),
-                    StrokeThickness = 2,
-                    StrokeShape = new RoundRectangle { CornerRadius = 6 }
-                };
-                if (newRound.WinningColor == "czerwony")
-                {
-                    newBorder.BackgroundColor = Color.FromHex("#FF0000");
-                }
-                else if (newRound.WinningColor == "czarny")
-                {
-                    newBorder.BackgroundColor = Color.FromHex("#242424");
+                    cash_result_label.Text = $"Przegrałeś {current_bet}$";
                 }
                 else
                 {
-                    newBorder.BackgroundColor = Color.FromHex("#008000");
+                    cash_result_label.Text = $"Wygrałeś: {value_won}$";
                 }
-                BetsHistoryStackLayout.Children.Insert(0, newBorder);
-
-                if (BetsHistoryStackLayout.Children.Count > 5)
+                balance -= current_bet;
+                balance += value_won;
+                balance_label.Text = Math.Round(balance, 2).ToString() + "$";
+                using (var db = new RuletkaDb())
                 {
-                    BetsHistoryStackLayout.Children.RemoveAt(5);
-                }
-
-                if (App.CurrentUser.Id == newBet.UserId)
-                {
-                    gamesPlayed++;
-                    if (newBet.BetType == "wygrana")
+                    db.UpdateBalance(App.CurrentUser.Id, balance);
+                    GameRound newRound = new GameRound
                     {
-                        valueWon += value_won;
-                        betsWon += 1;
+                        WinningColor = winning_color,
+                        WinningNumber = winning_number
+                    };
+                    db.AddGameRound(newRound);
+
+                    Bet newBet = new Bet
+                    {
+                        UserId = App.CurrentUser.Id,
+                        GameRoundId = newRound.Id,
+                        BetType = is_bet_won ? "wygrana" : "przegrana",
+                        Value = current_bet
+                    };
+                    db.AddBet(newBet);
+
+                    Label newLabel = new Label
+                    {
+                        Text = newRound.WinningNumber.ToString(),
+                        TextColor = Colors.White,
+                        FontSize = 16,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        VerticalTextAlignment = TextAlignment.Center,
+                    };
+
+                    Border newBorder = new Border
+                    {
+                        Content = newLabel,
+                        WidthRequest = 150,
+                        HeightRequest = 38,
+                        Margin = new Thickness(4),
+                        Stroke = Color.FromHex("#1E2F40"),
+                        StrokeThickness = 2,
+                        StrokeShape = new RoundRectangle { CornerRadius = 6 }
+                    };
+                    if (newRound.WinningColor == "czerwony")
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#FF0000");
                     }
+                    else if (newRound.WinningColor == "czarny")
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#242424");
+                    }
+                    else
+                    {
+                        newBorder.BackgroundColor = Color.FromHex("#008000");
+                    }
+
+                    Label resultLabel = new Label
+                    {
+                        Text = newRound.WinningNumber.ToString(),
+                        TextColor = Colors.White,
+                        FontSize = 16,
+                        FontAttributes = FontAttributes.Bold,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        VerticalTextAlignment = TextAlignment.Center,
+                    };
+
+                    Border resultBorder = new Border
+                    {
+                        Content = resultLabel,
+                        WidthRequest = 150,
+                        HeightRequest = 38,
+                        Margin = new Thickness(4, 0, 4, 0),
+                        Stroke = Color.FromHex("#1E2F40"),
+                        StrokeThickness = 2,
+                        StrokeShape = new RoundRectangle { CornerRadius = 6 }
+                    };
+                    if (newRound.WinningColor == "czerwony")
+                    {
+                        resultBorder.BackgroundColor = Color.FromHex("#FF0000");
+                    }
+                    else if (newRound.WinningColor == "czarny")
+                    {
+                        resultBorder.BackgroundColor = Color.FromHex("#242424");
+                    }
+                    else
+                    {
+                        resultBorder.BackgroundColor = Color.FromHex("#008000");
+                    }
+
+                    BetsHistoryStackLayout.Children.Insert(0, newBorder);
+                    ResultStackLayout.Children.Insert(0, resultBorder);
+
+                    if (BetsHistoryStackLayout.Children.Count > 5)
+                    {
+                        BetsHistoryStackLayout.Children.RemoveAt(5);
+                    }
+
+                    if (ResultStackLayout.Children.Count > 1)
+                    {
+                        ResultStackLayout.Children.RemoveAt(1);
+                    }
+
+                    if (App.CurrentUser.Id == newBet.UserId)
+                    {
+                        gamesPlayed++;
+                        if (newBet.BetType == "wygrana")
+                        {
+                            valueWon += value_won;
+                            betsWon += 1;
+                        }
+                    }
+                    currentBetOnColors = 0;
+                    currentBetOnNumbers = 0;
+                    current_bet = 0;
+                    current_color_bet_label.Text = "0$";
+                    current_number_bet_label.Text = "0$";
+                    total_current_bet.Text = "0$";
+                    games_played_label.Text = gamesPlayed.ToString();
+                    total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
+                    games_won_label.Text = betsWon.ToString();
+
+                    await Task.Delay(250);
+                    ClearBets();
                 }
-                currentBetOnColors = 0;
-                currentBetOnNumbers = 0;
-                current_bet = 0;
-                current_color_bet_label.Text = "0$";
-                current_number_bet_label.Text = "0$";
-                total_current_bet.Text = "0$";
-                games_played_label.Text = gamesPlayed.ToString();
-                total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
-                games_won_label.Text = betsWon.ToString();
             }
-        }
         
 
         private void CancelButton_Clicked(object sender, EventArgs e)

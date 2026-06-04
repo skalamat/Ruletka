@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Ruletka.MainPage"  WidthRequest="950" HeightRequest="900" MinimumHeightRequest="900" MinimumWidthRequest="950">
+             x:Class="Ruletka.MainPage"  WidthRequest="950" HeightRequest="850" MinimumHeightRequest="900" MinimumWidthRequest="950">
     
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -68,7 +68,7 @@
             <Grid>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="650"></ColumnDefinition>
+                    <ColumnDefinition Width="655"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
@@ -77,13 +77,17 @@
                     <!--KOŁO RULETKI-->
                     <Border Background="#36404A" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8" Padding="10" Margin="0,0,0,15">
 
-                        <VerticalStackLayout>
+                        <VerticalStackLayout Spacing="0">
 
-                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" HorizontalOptions="Center" TextColor="#F9F6EE">Koło Ruletki</Label>
+                            <Label Margin="10,10,10,4" FontAttributes="Bold" FontSize="20" FontFamily="PlayfairDisplay" HorizontalOptions="Start" TextColor="#F9F6EE">Koło Ruletki</Label>
 
-                            <GraphicsView x:Name="WheelView" HeightRequest="340" WidthRequest="340" HorizontalOptions="Center" Margin="0,8,0,8"/>
+                            <GraphicsView x:Name="WheelView" HeightRequest="340" WidthRequest="340" HorizontalOptions="Center" Margin="0,0,0,0"/>
 
-                            <Label x:Name="result_label" FontFamily="PlayfairDisplay" HorizontalOptions="Center" FontSize="17" FontAttributes="Bold" Margin="0,0,0,10"></Label>
+                            <VerticalStackLayout x:Name="ResultStackLayout">
+
+                            </VerticalStackLayout>
+                            
+                            <Label x:Name="cash_result_label" HorizontalOptions="Center" FontSize="17" FontAttributes="Bold" Margin="0,3,0,10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
 
                             <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
                                 <Button x:Name="SpinButton" Text="▶️ Zakręć kołem" BackgroundColor="Maroon" FontAttributes="Bold" Clicked="OnSpinClicked" TextColor="#F5F5F5">
