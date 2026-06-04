@@ -287,7 +287,6 @@ namespace Ruletka
                 {
                     if (winning_number == i)
                     {
-                        //cash_result_label.Text += $"Wygrałeś {current_bet_on[i] * 35}$ na numerze {i}!";
                         value_won += current_bet_on[i] * 35;
                         is_bet_won = true;
                     }
@@ -297,13 +296,11 @@ namespace Ruletka
             {
                 if (winning_color == "czarny" && current_bet_on_black > 0)
                 {
-                    //cash_result_label.Text += $"Wygrałeś {current_bet_on_black * 2}$ na kolorze czarnym!";
                     value_won += current_bet_on_black * 2;
                     is_bet_won = true;
                 }
                 else if (winning_color == "czerwony" && current_bet_on_red > 0)
                 {
-                    //cash_result_label.Text += $"Wygrałeś {current_bet_on_red * 2}$ na kolorze czerwonym!";
                     value_won += current_bet_on_red * 2;
                     is_bet_won = true;
                 }
