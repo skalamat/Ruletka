@@ -81,6 +81,7 @@ namespace Ruletka
                     games_played_label.Text = gamesPlayed.ToString();
                     total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
                     games_won_label.Text = betsWon.ToString();
+                    userName_label.Text = App.CurrentUser.UserName;
                 }
             }
             else
@@ -99,7 +100,9 @@ namespace Ruletka
                 betsWon = 0;
                 games_won_label.Text = "0";
 
+                cash_result_label.Text = "";
 
+                userName_label.Text = "Niezalogowano";
             }
         }
         public MainPage()
@@ -212,6 +215,10 @@ namespace Ruletka
 
                 betsWon = 0;
                 games_won_label.Text = "0";
+
+                cash_result_label.Text = "";
+
+                userName_label.Text = "Niezalogowano";
             }
         }
         private void RegisterTapped(object sender, TappedEventArgs e)
