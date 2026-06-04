@@ -285,7 +285,7 @@ namespace Ruletka
                     if (winning_number == i)
                     {
                         result_label.Text += $"\nWygrałeś {current_bet_on[i] * 35}$ na numerze {i}!";
-                        value_won = current_bet_on[i] * 35;
+                        value_won += current_bet_on[i] * 35;
                         is_bet_won = true;
                     }
                 }
@@ -295,13 +295,13 @@ namespace Ruletka
                 if (winning_color == "czarny" && current_bet_on_black > 0)
                 {
                     result_label.Text += $"\nWygrałeś {current_bet_on_black * 2}$ na kolorze czarnym!";
-                    value_won = current_bet_on_black * 2;
+                    value_won += current_bet_on_black * 2;
                     is_bet_won = true;
                 }
                 else if (winning_color == "czerwony" && current_bet_on_red > 0)
                 {
                     result_label.Text += $"\nWygrałeś {current_bet_on_red * 2}$ na kolorze czerwonym!";
-                    value_won = current_bet_on_red * 2;
+                    value_won += current_bet_on_red * 2;
                     is_bet_won = true;
                 }
             }
@@ -377,7 +377,7 @@ namespace Ruletka
                     gamesPlayed++;
                     if (newBet.BetType == "wygrana")
                     {
-                        valueWon += newBet.Value;
+                        valueWon += value_won;
                         betsWon += 1;
                     }
                 }
