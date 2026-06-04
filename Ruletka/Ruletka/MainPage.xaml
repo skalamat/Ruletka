@@ -37,7 +37,7 @@
                 
                 <Border Background="#36404A" WidthRequest="170" HeightRequest="40" HorizontalOptions="Start" VerticalOptions="Center" Margin="260,5,5,5" StrokeShape="RoundRectangle 12" Stroke="SlateGray" StrokeThickness="0.8">
                     <HorizontalStackLayout HorizontalOptions="Center">
-                        <Label Margin="0,0,0,0" WidthRequest="150" FontAttributes="Bold" FontSize="20"  x:Name="userName_label" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" VerticalTextAlignment="Center">Niezalogowano</Label>
+                        <Label Margin="0,0,0,0" WidthRequest="150" FontAttributes="Bold" FontSize="20"  x:Name="userName_label" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" VerticalTextAlignment="Center" FontFamily="PlayfairDisplay">Niezalogowano</Label>
                     </HorizontalStackLayout>
                 </Border>
                 
