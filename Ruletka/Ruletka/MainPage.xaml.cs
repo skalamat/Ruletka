@@ -249,7 +249,7 @@ namespace Ruletka
             if (current_bet > balance)
             {
                 DisplayAlert("Błąd", "Nie masz wystarczająco dużo środków, aby postawić ten zakład.", "OK");
-                await Task.Delay(1000);
+                await Task.Delay(250);
                 ClearBets();
                 return;
             }
@@ -257,9 +257,13 @@ namespace Ruletka
 
 
 
-            if (winning_number % 2 == 0)
+            if (winning_number % 2 == 0 && winning_number != 0)
             {
                 winning_color = "czarny";
+            }
+            else if(winning_number == 0)
+            {
+                winning_color = "zielony";
             }
             else
             {
@@ -301,7 +305,7 @@ namespace Ruletka
             balance -= current_bet;
             balance += value_won;
             balance_label.Text = Math.Round(balance, 2).ToString() + "$";
-            await Task.Delay(1000);
+            await Task.Delay(250);
             ClearBets();
             using (var db = new RuletkaDb())
             {
@@ -370,6 +374,12 @@ namespace Ruletka
                         betsWon += 1;
                     }
                 }
+                currentBetOnColors = 0;
+                currentBetOnNumbers = 0;
+                current_bet = 0;
+                current_color_bet_label.Text = "0$";
+                current_number_bet_label.Text = "0$";
+                total_current_bet.Text = "0$";
                 games_played_label.Text = gamesPlayed.ToString();
                 total_cash_won_label.Text = Math.Round(valueWon, 2).ToString() + "$";
                 games_won_label.Text = betsWon.ToString();
